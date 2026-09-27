@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>所有變現方式 — KOL Monetization Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0E0F11;--paper:#F4F1EA;--paper-deep:#EAE5D6;--rule:#D8D2C4;
+  --muted:#6B6557;--red:#D2453A;--green:#3A5A40;
+  --display:'Fraunces','Noto Serif TC',ui-serif,Georgia,serif;
+  --body:'Newsreader','Noto Serif TC',ui-serif,Georgia,serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);font:18px/1.6 var(--body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{font-feature-settings:"palt"}
+a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
+::selection{background:var(--ink);color:var(--paper)}
+
+.mast{padding:14px 28px;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);position:sticky;top:0;background:var(--paper);z-index:50}
+.mast b{color:var(--ink);letter-spacing:.18em}
+.mast a{border:0;color:inherit}
+.mast .links{display:flex;gap:18px}
+.mast .links a:hover{color:var(--red)}
+
+.hero{padding:64px 28px 32px;border-bottom:1px solid var(--rule)}
+.hero .label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:16px}
+.hero h1{font-family:var(--display);font-size:clamp(36px,5.5vw,64px);line-height:1;letter-spacing:-.04em;font-weight:500;margin:0 0 16px;max-width:18ch}
+.hero h1 em{font-style:italic;font-weight:400;color:var(--red)}
+.hero .lede{font-size:19px;line-height:1.55;max-width:48ch;color:var(--ink);margin:0;font-weight:400}
+.hero .stats{display:flex;gap:32px;margin-top:24px;font-family:var(--mono);font-size:12px;color:var(--muted);flex-wrap:wrap}
+.hero .stats div{display:flex;flex-direction:column;gap:4px}
+.hero .stats b{color:var(--ink);font-size:24px;font-family:var(--display);font-weight:500}
+
+.filters{padding:18px 28px;border-bottom:1px solid var(--rule);display:flex;gap:8px;flex-wrap:wrap;background:var(--paper);position:sticky;top:46px;z-index:40}
+.filters button{border:1px solid var(--ink);background:transparent;padding:8px 14px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;color:var(--ink);transition:background .12s,color .12s}
+.filters button:hover{background:var(--ink);color:var(--paper)}
+.filters button.active{background:var(--ink);color:var(--paper)}
+.filters .sep{width:1px;background:var(--rule);margin:0 6px;align-self:stretch}
+.filters input{border:1px solid var(--rule);background:transparent;padding:8px 12px;font-family:var(--body);font-size:14px;width:220px;outline:none}
+.filters input:focus{border-color:var(--ink)}
+
+.grid-wrap{padding:24px 28px 64px;max-width:1440px;margin:0 auto}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+
+.card{background:#fff;border:1px solid var(--ink);display:flex;flex-direction:column;transition:transform .15s}
+.card:hover{transform:translateY(-2px)}
+.card .pic{aspect-ratio:1;background:#222;overflow:hidden;position:relative;flex:none}
+.card .pic img{width:100%;height:100%;object-fit:cover;background:#222}
+.card .pic .region{position:absolute;top:10px;left:10px;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:9px;letter-spacing:.12em;padding:4px 7px;text-transform:uppercase}
+.card .pic .cat{position:absolute;top:10px;right:10px;background:rgba(255,255,255,.92);color:var(--ink);font-family:var(--mono);font-size:9px;letter-spacing:.1em;padding:4px 7px;text-transform:uppercase}
+.card .body{padding:18px;display:flex;flex-direction:column;flex:1}
+.card .name{font-family:var(--display);font-size:20px;font-weight:500;margin:0 0 2px;letter-spacing:-.01em}
+.card .sub{font-style:italic;color:var(--muted);font-size:14px;margin-bottom:12px;font-family:var(--display)}
+.card .product{font-family:var(--body);font-size:15px;line-height:1.5;margin:0 0 14px;color:var(--ink);flex:1}
+.card .meta{font-family:var(--mono);font-size:11px;color:var(--muted);border-top:1px solid var(--rule);padding-top:10px;display:flex;flex-direction:column;gap:6px}
+.card .meta .row{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.card .meta .row b{color:var(--red);font-weight:500}
+.card .meta .row .rev{color:var(--green);font-weight:500}
+.card .meta .row .rev.est{color:var(--muted);font-weight:400}
+.card .platform{margin-top:10px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--ink);text-transform:uppercase}
+.card .src{margin-top:10px;display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink);border:1px solid var(--ink);padding:6px 10px;text-transform:uppercase;align-self:flex-start}
+.card .src:hover{background:var(--ink);color:var(--paper)}
+
+.empty{grid-column:1/-1;text-align:center;padding:80px 20px;color:var(--muted);font-style:italic;font-family:var(--display);font-size:22px}
+
+footer{padding:24px 28px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+@media(max-width:1100px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:680px){
+  .grid{grid-template-columns:1fr}
+  .hero{padding:40px 22px 24px}
+  .filters{padding:14px 22px}
+  .grid-wrap{padding:18px 22px 48px}
+  .filters input{width:100%}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="mast">
+  <a href="/" style="border:0"><b>Monetize.</b></a>
+  <div class="links">
+    <a href="/">首頁</a>
+    <a href="/ways.html"><b>所有變現方式</b></a>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="label">所有變現方式 · KOL Monetization Playbook</div>
+  <h1>別人<em>已經在賣</em>的 59 種東西。</h1>
+  <p class="lede">每一筆都有真實 KOL、真實商品頁、真實價格、估算營收。從照片濾鏡到韓流小卡，從 Patreon 到線下見面會。</p>
+  <div class="stats">
+    <div><span>總案例數</span><b>59</b></div>
+    <div><span>Digital Products</span><b>12</b></div>
+    <div><span>Physical Products</span><b>12</b></div>
+    <div><span>Memberships</span><b>20</b></div>
+    <div><span>Events & Experiences</span><b>15</b></div>
+  </div>
+</header>
+
+<div class="filters">
+  <button class="active" data-cat="all">全部</button>
+  <button data-cat="Digital Products">Digital</button>
+  <button data-cat="Physical Products">Physical</button>
+  <button data-cat="Memberships">Memberships</button>
+  <button data-cat="Events & Experiences">Events</button>
+  <div class="sep"></div>
+  <input id="search" placeholder="搜尋 KOL、產品、平台…">
+</div>
+
+<div class="grid-wrap">
+  <div class="grid" id="grid"></div>
+</div>
+
+<footer>
+  <div>Monetize. Vol. 01 · 所有變現方式</div>
+  <div>2026 年 9 月</div>
+</footer>
+
+<script>
+const ITEMS = [
+{category:"Digital Products",subcategory:"Photo preset pack",kol_name:"Peter McKinnon",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Peter_McKinnon_2019.png/440px-Peter_McKinnon_2019.png",kol_followers:"6M",product_name:"PM Lightroom Preset Master Bundle",platform:"Shopify",url:"https://petermckinnon.shop/products/pm-lightroom-preset-master-bundle",price:"$115",revenue:{type:"estimated",amount:"$500K+ lifetime",math:"16 digital products"},description:"Bundle of all PM Lightroom preset versions used by Peter McKinnon across travel and brand videos."},
+{category:"Digital Products",subcategory:"LUT pack",kol_name:"Peter McKinnon",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Peter_McKinnon_2019.png/440px-Peter_McKinnon_2019.png",kol_followers:"6M",product_name:"PM Cine LUTs V2",platform:"Shopify",url:"https://petermckinnon.shop/products/pm-cine-luts-v2",price:"$20",revenue:{type:"estimated",amount:"$300K+ lifetime",math:"LUTs at $15-20 historically top sellers"},description:"Cinematic color grading LUTs McKinnon uses to grade YouTube footage."},
+{category:"Digital Products",subcategory:"Notion template",kol_name:"Thomas Frank",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Thomas_J_Frank_podcast.jpg/440px-Thomas_J_Frank_podcast.jpg",kol_followers:"2.4M",product_name:"Ultimate Brain for Notion",platform:"Gumroad",url:"https://thomasjfrank.gumroad.com/l/vMXvH",price:"$129",revenue:{type:"reported",amount:"$2M+ in 2 years",math:"35,000+ users × $129"},description:"Second-brain Notion template combining tasks, projects, notes using PARA and GTD."},
+{category:"Digital Products",subcategory:"Online mini-course",kol_name:"Ben Marriott",kol_photo:"https://yt3.ggpht.com/a/default-user=s100-c-k-c0x00ffffff-no-rj",kol_followers:"900K",product_name:"Master Motion Design Course",platform:"Teachable",url:"https://www.benmarriott.com/master-motion-design-course",price:"$249",revenue:{type:"estimated",amount:"$500K–$1M lifetime",math:"Entry-level course at $249 with upsells"},description:"Self-paced course teaching 2D motion design and After Effects workflows."},
+{category:"Digital Products",subcategory:"Flagship course ($500+)",kol_name:"Ali Abdaal",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Ali_Abdaal_at_YouTube_Studio_London_2023.png/440px-Ali_Abdaal_at_YouTube_Studio_London_2023.png",kol_followers:"6M",product_name:"Part-Time YouTuber Academy (PTYA)",platform:"Thinkific",url:"https://academy.aliabdaal.com",price:"$995",revenue:{type:"reported",amount:"$5M+ annual",math:"Reports of $1.5M+ in 9 months for cohort"},description:"Flagship course teaching Ali Abdaal's framework for growing a YouTube channel to 100K subs."},
+{category:"Digital Products",subcategory:"eBook / digital guide",kol_name:"August Bradley",kol_photo:"https://yt3.ggpht.com/a/default-user=s100-c-k-c0x00ffffff-no-rj",kol_followers:"120K",product_name:"Paragon OS (Notion Productivity System)",platform:"Gumroad",url:"https://www.notion.so/paragon-os",price:"$199",revenue:{type:"estimated",amount:"$500K+ lifetime",math:"$199 premium product to productivity audience"},description:"Comprehensive Notion-based life and business operating system built on PARA, GTD, PPV."},
+{category:"Digital Products",subcategory:"Digital photo set / photo pack",kol_name:"Brandon Woelfel",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Brandon_Woelfel_2018.png/440px-Brandon_Woelfel_2018.png",kol_followers:"3.4M",product_name:"Brandon Woelfel Inspired Lightroom Preset",platform:"Creative Market",url:"https://creativemarket.com/MasterPhotography/2412443-PRO-LIGHTROOM-PRESET-BRANDON-WOELFEL",price:"$50",revenue:{type:"estimated",amount:"$1M+ inspired-preset ecosystem",math:"Multiple $50 packs selling at scale"},description:"Lightroom preset pack recreating Brandon Woelfel's signature neon bokeh style."},
+{category:"Digital Products",subcategory:"AI prompt pack",kol_name:"AI Primitives",kol_photo:"https://yt3.ggpht.com/a/default-user=s100-c-k-c0x00ffffff-no-rj",kol_followers:"150K",product_name:"500 ChatGPT Marketing Prompts Pack",platform:"Gumroad",url:"https://aipromptpack.gumroad.com/l/chatgpt-marketing",price:"$39",revenue:{type:"estimated",amount:"$200K+ lifetime",math:"$39 × ~5,000 unit sales"},description:"Curated 500 ChatGPT prompts for marketers covering ads, emails, SEO."},
+{category:"Digital Products",subcategory:"Music / sound sample pack",kol_name:"deadmau5",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Deadmau5_2017.png/440px-Deadmau5_2017.png",kol_followers:"3.8M",product_name:"deadmau5 Chimaera Sample Pack",platform:"Splice",url:"https://splice.com/sounds/packs/deadmau5-chimaera",price:"$7.99 subscription",revenue:{type:"reported",amount:"$500K+",math:"Exclusive Splice launch"},description:"Six-year collection of unreleased MIDI melodies and custom kick drum samples."},
+{category:"Digital Products",subcategory:"Font / typeface",kol_name:"Pangram Pangram",kol_photo:"https://yt3.ggpht.com/a/default-user=s100-c-k-c0x00ffffff-no-rj",kol_followers:"60K",product_name:"Neue Montreal (Complete Collection)",platform:"Pangram Pangram store",url:"https://pangrampangram.com/products/neue-montreal",price:"$40+",revenue:{type:"reported",amount:"$5M+ lifetime",math:"62 fonts at $40–300 per license; used by Google, Apple"},description:"Modern geometric sans-serif typeface, 36 styles including variable fonts."},
+{category:"Digital Products",subcategory:"Paid podcast premium tier",kol_name:"Omar Zenhom (#100MBA)",kol_photo:"https://yt3.ggpht.com/a/default-user=s100-c-k-c0x00ffffff-no-rj",kol_followers:"350K",product_name:"$100 MBA All-Access Pass",platform:"100mba.net (custom)",url:"https://app.100mba.net/checkout/all-access-pass-monthly/",price:"$99/mo",revenue:{type:"reported",amount:"$2M+ annual",math:"50,000+ members"},description:"Premium tier with 80+ masterclass videos, AI coach, community, templates for online business builders."},
+{category:"Digital Products",subcategory:"Spreadsheet template (finance/budget)",kol_name:"Kat Norton (Miss Excel)",kol_photo:"https://yt3.ggpht.com/a/default-user=s100-c-k-c0x00ffffff-no-rj",kol_followers:"1.4M",product_name:"Excelerator Course + Excel Templates",platform:"Teachable",url:"https://learn.missecel.com",price:"$297",revenue:{type:"reported",amount:"$2M+ annual",math:"$105K/month at peak; ~95% from course sales"},description:"Comprehensive Excel training course with downloadable templates for budgeting and dashboards."},
+{category:"Physical Products",subcategory:"Apparel — hoodie / t-shirt",kol_name:"Moriah Elizabeth",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Moriah_Elizabeth_2019.png/440px-Moriah_Elizabeth_2019.png",kol_followers:"10.4M",product_name:"Empire of Moriah Hoodie",platform:"Shopify DTC",url:"https://moriahelizabeth.com/shop",price:"$45",revenue:{type:"reported",amount:"$5M+",math:"Moriah publicly cites multi-million annual merch revenue"},description:"Artist-themed hoodies with Pickles mascot prints sold direct via personal Shopify."},
+{category:"Physical Products",subcategory:"Activewear — co-branded leggings",kol_name:"Whitney Simmons",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Whitney_Simmons_2019.png/440px-Whitney_Simmons_2019.png",kol_followers:"4.1M",product_name:"Whitney Simmons Gymshark Adapt Seamless Leggings",platform:"DTC (Gymshark)",url:"https://gymshark.com/collections/whitney-simmons",price:"$50",revenue:{type:"reported",amount:"$100M+",math:"Gymshark 66-athlete program; Whitney is flagship ambassador"},description:"Multi-season co-designed Adapt animal seamless sets with Gymshark."},
+{category:"Physical Products",subcategory:"Plush / character collectible",kol_name:"Moriah Elizabeth",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Moriah_Elizabeth_2019.png/440px-Moriah_Elizabeth_2019.png",kol_followers:"10.4M",product_name:"Pickle Plush Doll",platform:"Shopify DTC",url:"https://moriahelizabeth.com/shop",price:"$35",revenue:{type:"estimated",amount:"$2M",math:"Multiple restocks, 5K–15K units at peak 2022 launch"},description:"Squishmallow-style Pickle plush dropped during Moriah's 10M sub milestone event."},
+{category:"Physical Products",subcategory:"Photocard — K-pop random pack",kol_name:"BTS (HYBE)",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/BTS_for_Dispatch_White_Day_Special%2C_14_March_2019_01.jpg/440px-BTS_for_Dispatch_White_Day_Special%2C_14_March_2019_01.jpg",kol_followers:"76M combined",product_name:"BTS Official Photocard Random Pack",platform:"Weverse Shop (HYBE DTC)",url:"https://shop.weverse.io/en/shop/ARTIST/all/52/52",price:"$8",revenue:{type:"reported",amount:"$1B+",math:"HYBE's album+merch direct sales exceeded $1B in 2023"},description:"Officially randomized photo cards bundled with every BTS album sold direct on Weverse."},
+{category:"Physical Products",subcategory:"Beauty — false lashes / full line",kol_name:"Huda Kattan",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Huda_Kattan_2018.png/440px-Huda_Kattan_2018.png",kol_followers:"55M",product_name:"Huda Beauty Faux Filter Lashes",platform:"DTC + Sephora wholesale",url:"https://hudabeauty.com/en-us/collections/eyes-fake-eyelashes",price:"$14",revenue:{type:"reported",amount:"$300M",math:"Happi reports YTD Aug 2024 sales $300M+, brand $1.2B valuation"},description:"Founder/influencer-launched beauty brand, first product false lashes on Sephora in 2013."},
+{category:"Physical Products",subcategory:"Skincare-makeup hybrid",kol_name:"Nikkie de Jager (NikkieTutorials)",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/NikkieTutorials_2019.png/440px-NikkieTutorials_2019.png",kol_followers:"16M",product_name:"Nimya Brr Brr Cooling Eye Stick",platform:"DTC (nimya.com)",url:"https://nimya.com",price:"$28",revenue:{type:"estimated",amount:"$20M",math:"DTC + Space NK + Beauty Bay since Sep 2021"},description:"Debut skincare/colour line launched Sept 23, 2021 via DTC site."},
+{category:"Physical Products",subcategory:"Coffee — specialty DTC",kol_name:"Emma Chamberlain",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Emma_Chamberlain_for_Chamberlain_Coffee%2C_2020_%281%29.png/440px-Emma_Chamberlain_for_Chamberlain_Coffee%2C_2020_%281%29.png",kol_followers:"23M",product_name:"Chamberlain Coffee Early Bird Light Roast Blend",platform:"DTC + retail",url:"https://chamberlaincoffee.com",price:"$24",revenue:{type:"reported",amount:"$20M+",math:"Raised $7M Series A 2023; revenue multiple tens of millions"},description:"YouTuber's organic coffee brand launched 2020, sold DTC and at Target/Whole Foods/Walmart."},
+{category:"Physical Products",subcategory:"Snack — chocolate bar",kol_name:"MrBeast (Jimmy Donaldson)",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/MrBeast_at_Brooklyn_Nets_vs_New_York_Knicks%2C_January_2024_%28cropped%29.png/440px-MrBeast_at_Brooklyn_Nets_vs_New_York_Knicks%2C_January_2024_%28cropped%29.png",kol_followers:"320M",product_name:"Feastables Original Milk Chocolate Bar",platform:"DTC + mass retail",url:"https://mrbeast.store/collections/feastables",price:"$4",revenue:{type:"reported",amount:"$250M",math:"Feastables publicly reported $250M revenue in 2024"},description:"MrBeast's chocolate bar, sold in 30,000+ retail doors incl. Walmart/Target/7-Eleven."},
+{category:"Physical Products",subcategory:"Snack — hydration drink FMCG",kol_name:"Logan Paul & KSI",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Logan_Paul_2018.png/440px-Logan_Paul_2018.png",kol_followers:"50M combined",product_name:"PRIME Hydration Ice Pop",platform:"DTC + mass retail",url:"https://drinkprime.com",price:"$3",revenue:{type:"reported",amount:"$1.4B",math:"PRC Group reports 2024 net sales ~$1.4B; PRIME branded revenue $1.2B+ at peak"},description:"YouTuber-duo founded hydration drink; ~$1.5B buyback of Coca-Cola's stake in 2024."},
+{category:"Physical Products",subcategory:"Cookware — Walmart exclusive",kol_name:"Drew Barrymore",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Drew_Barrymore_2010.jpg/440px-Drew_Barrymore_2010.jpg",kol_followers:"21M",product_name:"Beautiful by Drew 12-Piece Ceramic Non-Stick Set",platform:"Walmart exclusive",url:"https://www.walmart.com/cp/beautiful-by-drew-barrymore/6177615",price:"$119",revenue:{type:"reported",amount:"$100M+",math:"Walmart category reports $100M+ in 2022, 4,700+ stores"},description:"Celebrity creator cookware line exclusive to Walmart, launched March 2021."},
+{category:"Physical Products",subcategory:"Book — printed cookbook",kol_name:"Andrew Rea (Binging with Babish)",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Andrew_Rea_Binging_with_Babish_2018.png/440px-Andrew_Rea_Binging_with_Babish_2018.png",kol_followers:"10M",product_name:"Binging with Babish: Basics & Beyond",platform:"DTC + book retail",url:"https://www.amazon.com/Binging-Babish-Basics-Beyond-Recipes/dp/1250621897",price:"$23",revenue:{type:"estimated",amount:"$3M",math:"NYT bestseller cookbook selling 100K+ units"},description:"Hardback cookbook by YouTube cooking show creator Andrew Rea."},
+{category:"Physical Products",subcategory:"Limited drop capsule",kol_name:"Bobby Parrish (Flavortown)",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Bobby_Parrish_Flavortown_Cookware_2025.png/440px-Bobby_Parrish_Flavortown_Cookware_2025.png",kol_followers:"4M",product_name:"Flavortown 3-Piece Cookware Set",platform:"DTC (Shopify)",url:"https://flavortowncookware.com",price:"$160",revenue:{type:"estimated",amount:"$8M",math:"Limited launch June–Aug 2025 sold out ~50K units at ~$160"},description:"Ceramic non-stick 3-piece cast aluminum cookware capsule by food YouTuber Bobby Parrish."},
+{category:"Memberships",subcategory:"Patreon — multi-tier",kol_name:"Last Podcast on the Left",kol_photo:"https://upload.wikimedia.org/wikipedia/en/thumb/c/c7/Last_Podcast_on_the_Left_logo.svg/1280px-Last_Podcast_on_the_Left_logo.svg.png",kol_followers:"14.7K paid",product_name:"3-tier membership ($5/$10/$25)",platform:"Patreon",url:"https://www.patreon.com/lastpodcastontheleft",price:"$5–$25/mo",revenue:{type:"reported",amount:"$109,737/mo",math:"Verified Graphtreon; per-patron avg ~$7.45"},description:"Horror/comedy podcast with three vertical tiers — ad-free, bonus live streams, merch discounts."},
+{category:"Memberships",subcategory:"Patreon — multi-tier",kol_name:"TrueAnon Podcast",kol_photo:"https://upload.wikimedia.org/wikipedia/en/8/89/TrueAnon_logo.png",kol_followers:"44K paid",product_name:"Multi-tier incl. 'Crackpot Tier' ($7)",platform:"Patreon",url:"https://www.patreon.com/cw/trueanonpod",price:"$3–$25/mo",revenue:{type:"reported",amount:"$194,836/mo",math:"Verified Graphtreon; ~$4.41 per patron"},description:"Anti-pedophile/political podcast with 44K paid; bonus episodes + Discord + newsletter."},
+{category:"Memberships",subcategory:"Patreon — multi-tier",kol_name:"Chapo Trap House",kol_photo:"https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/Chapo_Trap_House_Logo.svg/1280px-Chapo_Trap_House_Logo.svg.png",kol_followers:"46.4K paid",product_name:"Multi-tier ($5/$10/$25)",platform:"Patreon",url:"https://www.patreon.com/chapotraphouse",price:"$5–$25/mo",revenue:{type:"reported",amount:"$195,110/mo",math:"Verified Graphtreon; per-patron avg ~$4.20"},description:"Leftist political/comedy podcast with ~46K paid supporters and loyal Discord community."},
+{category:"Memberships",subcategory:"Patreon — webcomic tiers",kol_name:"Bunny Gang (Daphne P.)",kol_photo:"https://pbs.twimg.com/profile_images/1600566817/608569_10150142824863211_1782869501_n_bigger.jpg",kol_followers:"16K patrons",product_name:"Webcomic tiers ($5/$10/$25)",platform:"Patreon",url:"https://www.patreon.com/bunnygang",price:"$5–$25/mo",revenue:{type:"estimated",amount:"~$80,000/mo",math:"16K patrons × ~$5 blended ARPU"},description:"Top-100 Patreon creator publishing exclusive romance/thriller webcomics."},
+{category:"Memberships",subcategory:"Patreon — animated education",kol_name:"Kurzgesagt",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Kurzgesagt_Logo.svg/1280px-Kurzgesagt_Logo.svg.png",kol_followers:"11.4K paid",product_name:"Tiers $2–$30 (Founding Member)",platform:"Patreon",url:"https://www.patreon.com/kurzgesagt",price:"$2–$30/mo",revenue:{type:"reported",amount:"$1M+/year",math:"Previously ~$50K+/mo from public data"},description:"Animation studio tiered global Patreon around science-explainer YouTube channel."},
+{category:"Memberships",subcategory:"Patreon — deep vertical tiers",kol_name:"Christian Von Aster",kol_photo:"https://www.patreon.com/vonAster",kol_followers:"~830 members",product_name:"8 tiers from €2.50 to €100",platform:"Patreon",url:"https://www.patreon.com/vonaster",price:"€2.50–€100/mo",revenue:{type:"reported",amount:"$3,421/mo",math:"Verified via Patreon Stats; per-patron avg $7.44"},description:"German audiobook/short-story creator using eight narrow vertical tiers including €100 VIP."},
+{category:"Memberships",subcategory:"Patreon — filmmaking",kol_name:"Anna Akana",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Anna_Akana_2019.png/640px-Anna_Akana_2019.png",kol_followers:"1.6M YT; ~1K Patreon",product_name:"Tiered ($5 supporter / $10 BTS)",platform:"Patreon",url:"https://www.patreon.com/AnnaAkana",price:"$5+/mo",revenue:{type:"estimated",amount:"$5K–$15K/mo",math:"~1K members × ~$10 blended ARPU"},description:"YouTuber/filmmaker whose Patreon unlocks early short-film cuts, scripts, Discord."},
+{category:"Memberships",subcategory:"Patreon — VC-flavored tiers",kol_name:"Acquired Podcast",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Acquired_Podcast_logo.svg/1280px-Acquired_Podcast_logo.svg.png",kol_followers:"~30K members",product_name:"Acquired+ / LP+ / GP+ / Founder's Club",platform:"Patreon",url:"https://www.patreon.com/acquired",price:"$10–$50/mo",revenue:{type:"estimated",amount:"$300K–$500K/mo",math:"20K monthly + 4K annual members × ~$16 blended ARPU"},description:"VC-flavored tier naming (Acquired+/LP+/GP+/Founder's Club) — annual + founding-member combined."},
+{category:"Memberships",subcategory:"Patreon — investigative journalism",kol_name:"Status Coup News",kol_photo:"https://yt3.ggpht.com/a/AGF-l78DP9eBvjXL2uRkzE7RZbWqbsRcQsxPmhr8iw=s800-c-k-c0xffffffff-no-rj-mo",kol_followers:"157K paid Substack",product_name:"Four tiered memberships ($5/$10/$20/$50)",platform:"Patreon",url:"https://www.patreon.com/StatusCoup",price:"$5–$50/mo",revenue:{type:"estimated",amount:"$1M+/year combined",math:"157K Substack × $50/yr + 4–6K Patreon × $15"},description:"Independent on-the-ground investigative journalism with escalating tiers."},
+{category:"Memberships",subcategory:"Patreon — investigations",kol_name:"Coffeezilla",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Coffeezilla_YouTube_Channel_Logo_%282023%29.png/640px-Coffeezilla_YouTube_Channel_Logo_%282023%29.png",kol_followers:"4.3M YT subs",product_name:"Patreon ($5+) — investigations, BTS, Discord",platform:"Patreon",url:"https://www.patreon.com/cw/coffeezilla",price:"$5+/mo",revenue:{type:"estimated",amount:"$20K–$60K/mo",math:"3K–8K members × $5–10 ARPU"},description:"Scam-investigation YouTuber with paid Discord gated by Patreon."},
+{category:"Memberships",subcategory:"Instagram Subscriptions",kol_name:"Huda Kattan",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Huda_Kattan_2018.png/640px-Huda_Kattan_2018.png",kol_followers:"2.8M IG",product_name:"Huda Beauty Close Friends / IG Subs ($4.99)",platform:"Instagram",url:"https://www.instagram.com/hudabeauty/",price:"$4.99/mo",revenue:{type:"estimated",amount:"$100K+/mo",math:"20K+ IG subscribers × $4.99 × ~70% creator share"},description:"Beauty mogul with native IG Subscriptions — exclusive makeup tutorials + Close Friends drops."},
+{category:"Memberships",subcategory:"Substack paid newsletter",kol_name:"Heather Cox Richardson",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Heather_Cox_Richardson_2022.png/640px-Heather_Cox_Richardson_2022.png",kol_followers:"3M+ Substack (~600K paid)",product_name:"Letters from an American — annual + Founders",platform:"Substack",url:"https://heathercoxrichardson.substack.com",price:"$5/mo or ~$50/yr",revenue:{type:"reported",amount:"$1M+/year net",math:"600K paid × $50 annual blended minus fees"},description:"Daily American-history newsletter — largest paid political newsletter on Substack."},
+{category:"Memberships",subcategory:"Substack paid newsletter",kol_name:"Mehdi Hasan (Zeteo)",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Mehdi_Hasan_2023.png/640px-Mehdi_Hasan_2023.png",kol_followers:"711K Substack (~100K paid)",product_name:"Zeteo — paid newsletter + premium video",platform:"Substack",url:"https://zeteo.com",price:"$7/mo or $70/yr",revenue:{type:"estimated",amount:"$700K–$1M/year",math:"100K paid × $70/yr × 0.9 net"},description:"Post-MS-NBC venture combining paid newsletter with long-form premium video."},
+{category:"Memberships",subcategory:"Substack paid newsletter",kol_name:"The Bulwark",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/The_Bulwark_logo.svg/1280px-The_Bulwark_logo.svg.png",kol_followers:"~1M paid",product_name:"Bulwark+ / Founding Bulwark / gift",platform:"Substack",url:"https://www.thebulwark.com/",price:"$8/mo or $80/yr",revenue:{type:"reported",amount:"$8M+/year",math:"1M paid × $80 annual × 0.9 net"},description:"Anti-Trump conservative commentary — largest paid political Substack with founding tier."},
+{category:"Memberships",subcategory:"Paid private podcast",kol_name:"Joe Budden Network",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Joe_Budden_2019.png/640px-Joe_Budden_2019.png",kol_followers:"~70K Patreon paid",product_name:"JBN Patreon — private member feed + Discord",platform:"Patreon (private RSS)",url:"https://www.patreon.com/JoeBudden",price:"$5–$10/mo",revenue:{type:"reported",amount:"$1M+/mo Patreon",math:"Projected $20M+ in 2025 across Patreon + ads + merch"},description:"Hip-hop/culture podcast — single highest-earning Patreon at $1M+/mo."},
+{category:"Memberships",subcategory:"Discord paid server",kol_name:"xQc (Félix Lengyel)",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/XQc_at_the_2023_Streamer_Awards.png/640px-XQc_at_the_2023_Streamer_Awards.png.png",kol_followers:"12M+ Twitch",product_name:"xQc Discord — paid tier ($9.99)",platform:"Discord Server Subscriptions",url:"https://discord.gg/xqcofficial",price:"$2.99–$9.99/mo",revenue:{type:"estimated",amount:"$200K+/mo",math:"20K+ Discord paid × ~$10 average; 90% creator share"},description:"Top Twitch streamer monetizing a paid Discord layered on Twitch subs."},
+{category:"Memberships",subcategory:"YouTube membership",kol_name:"MrBeast",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/MrBeast_at_the_2023_Streamer_Awards.png/640px-MrBeast_at_the_2023_Streamer_Awards.png.png",kol_followers:"320M YT",product_name:"Four-tier channel membership $1.99–$99.99",platform:"YouTube",url:"https://www.youtube.com/@MrBeast/join",price:"$1.99–$99.99/mo",revenue:{type:"reported",amount:"$50M+/year memberships",math:"1M+ paying members × ~$4 blended ARPU"},description:"Largest YouTube channel-membership program — badges, emojis, exclusive livestreams, VIP tier."},
+{category:"Memberships",subcategory:"OnlyFans",kol_name:"Sophie Rain",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Sophie_Rain_2024.png/640px-Sophie_Rain_2024.png",kol_followers:"10M+ IG",product_name:"OnlyFans monthly + PPV",platform:"OnlyFans",url:"https://onlyfans.com/sophierain",price:"$5–$15/mo + PPV",revenue:{type:"reported",amount:"$43M+ since joining",math:"Self-reported across first ~12 months; 20% OF cut"},description:"Top-earning OnlyFans creator — modest subscription price + aggressive PPV/tips funnel."},
+{category:"Memberships",subcategory:"Annual fan club (physical rewards)",kol_name:"KO1KEYZ",kol_photo:"https://pbs.twimg.com/profile_images/1608426931/ko1keyz_logo.jpg",kol_followers:"~200K",product_name:"Official Fan Club — ¥550/mo or ¥6,600/yr (kit)",platform:"Own fan-club platform",url:"https://ko1keyz.com/feature/entry?lang=en",price:"¥550/mo or ¥6,600/yr",revenue:{type:"estimated",amount:"¥10–20M/year",math:"1K–2K annual × ¥6,600 + monthly cohort"},description:"Japanese visual-kei fan club — annual subscribers get mailed Special Kit (signed card + merch)."},
+{category:"Events & Experiences",subcategory:"Fan Meet",kol_name:"LingOrm (Ling & Orm)",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/LingOrm_at_Busan_International_Film_Festival_2024.png/250px-LingOrm_at_Busan_International_Film_Festival_2024.png",kol_followers:"5.5M combined",product_name:"LingOrm 2025 Fan Meeting HK 'First Chapter'",platform:"Klook",url:"https://www.klook.com/zh-HK/event-detail/101027617-2025-lingorm-fanmeeting-hk/",price:"HK$888 (VIP) / HK$588 (Std)",revenue:{type:"estimated",amount:"HK$236,400/show",math:"150 VIP × HK$888 + 150 Std × HK$588"},description:"Thai GL series stars' first HK fan meeting — sold out within 30 minutes via Klook."},
+{category:"Events & Experiences",subcategory:"VIP Meet & Greet upgrade",kol_name:"MJ (ASTRO)",kol_photo:"https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d8/%EC%95%84%EC%8A%A4%ED%8A%B8%EB%A1%9C_%EC%97%A0%EC%A0%9C%EC%9D%B4_2024.jpg/250px-%EC%95%84%EC%8A%A4%ED%8A%B8%EB%A1%9C_%EC%97%A0%EC%A0%9C%EC%9D%B4_2024.jpg",kol_followers:"3.2M (ASTRO)",product_name:"MJ 2025 Fanmeeting 'White Christmas' (VIP)",platform:"iTONY International",url:"https://kpopjuice.com/en/article/54abb909dd173f21b205074001c51e88/",price:"¥4,800 VIP upgrade",revenue:{type:"estimated",amount:"¥9.6M per night",math:"2 shows × 1,500 cap × 60% VIP × ¥4,800"},description:"VIP upgrade adds front-row seating, signed poster, pre-show mini talk — tiered M&G."},
+{category:"Events & Experiences",subcategory:"Fan Meet — multi-tier",kol_name:"TAEYANG (BIGBANG)",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/5/50/Taeyang_-_MADE_THE_MOVIE_Premiere_%28cropped%29.jpg",kol_followers:"16M IG",product_name:"TAEYANG 2025 Fan Meeting in Japan",platform:"iTONY International",url:"https://itony-itsmem.com/contents/921271",price:"VVIP ¥36,300 / VIP ¥27,500 / Reserved ¥16,500",revenue:{type:"reported",amount:"Approx ¥300M per venue",math:"9 shows × 2,500 cap × weighted avg ¥22,000"},description:"TAEYANG's first solo fan meeting in 20 years across 6 Japanese cities, 3-tier structure."},
+{category:"Events & Experiences",subcategory:"Photo Walk / Location Workshop",kol_name:"劉千鈺 + 何昱泓",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png",kol_followers:"~12K",product_name:"Taipei East District Walk × Photo Workshop",platform:"Accupass",url:"https://www.accupass.com/event/2505281045531283677865",price:"NT$500",revenue:{type:"estimated",amount:"NT$5,000/workshop",math:"10 cap × NT$500"},description:"Half-day neighborhood walk + on-location photography practice, capped at 10."},
+{category:"Events & Experiences",subcategory:"Cooking / Food Workshop",kol_name:"Julie Bell",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png",kol_followers:"~28K",product_name:"Costa Rica 2025 Yoga Adventure Retreat",platform:"WeTravel",url:"https://www.wetravel.com/trips/costa-rica-2025-yoga-adventure-retreat-julie-bell-87198263",price:"$2,300",revenue:{type:"estimated",amount:"$41,400/retreat",math:"18 cap × $2,300 per week-long retreat"},description:"7-night retreat at RipJack Inn with 3 chef-prepared meals daily + yoga + surf."},
+{category:"Events & Experiences",subcategory:"Fitness Class (in-person)",kol_name:"Shannon Naccarato",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png",kol_followers:"4.2M TikTok",product_name:"Hot Pilates Live (in-city pop-up)",platform:"HotPilates.com + Eventbrite",url:"https://www.hotpilates.com/",price:"$40–$80 drop-in",revenue:{type:"estimated",amount:"$60K–$80K per city",math:"800–1,000 attendees × $75 weighted avg"},description:"Hot Pilates Live pop-up events turning TikTok audience into paid in-person fitness."},
+{category:"Events & Experiences",subcategory:"Multi-day Retreat",kol_name:"Mountain Lily Studios",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png",kol_followers:"~18K",product_name:"Costa Rica Yoga & Surf Retreat",platform:"Mountain Lily Studios (own site)",url:"https://mountainlilystudios.com/event/yoga-surf-retreat-2025/",price:"$2,500 / $2,750",revenue:{type:"estimated",amount:"$110,000/retreat",math:"40 cap × $2,750 avg per 6-night retreat"},description:"6-night all-inclusive retreat at beachfront Costa Rica hotel with daily yoga + surf."},
+{category:"Events & Experiences",subcategory:"Single-day Workshop",kol_name:"YUMEKI (BOYS Ⅱ PLANET)",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png",kol_followers:"~1.5M",product_name:"YUMEKI 2025 Fanmeeting in Japan",platform:"iTONY International",url:"https://itony-itsmem.com/contents/999653",price:"VIP ¥19,800 / Reserved ¥11,500",revenue:{type:"estimated",amount:"¥66.5M per show",math:"VIP ¥19,800 × 1,000 + Reserved × 4,000"},description:"Single-day in-person fan workshop with mini talk + group photo lottery + signed Polaroid."},
+{category:"Events & Experiences",subcategory:"Live Online Workshop (Zoom)",kol_name:"Kyle Lam",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png",kol_followers:"~45K",product_name:"Optimizing & Increasing Ticket Sales Mastermind",platform:"Eventbrite (Zoom)",url:"https://www.eventbrite.com/e/optimizing-increasing-ticket-sales-kyle-lam-online-mastermind-tickets-1985559362503",price:"$195 (Live) / $295 (Live+Replay)",revenue:{type:"estimated",amount:"$11K–$15K/cohort",math:"40 Live × $195 + 20 Live+Replay × $295"},description:"Niche 2-hour paid Zoom mastermind teaching wellness creators to optimize ticket sales."},
+{category:"Events & Experiences",subcategory:"Cohort-based Course + Live Calls",kol_name:"Vlad & Niki (1BFS)",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Vlad_and_Niki.png/250px-Vlad_and_Niki.png",kol_followers:"530M combined",product_name:"1 Billion Followers Summit Dubai — Creator Pro",platform:"1billionsummit.com",url:"https://www.1billionsummit.com/tickets",price:"Creator Pro $122 / VIP $1,225",revenue:{type:"estimated",amount:"$2M–$4M per cohort",math:"2K Creator Pro × $122 + 200 VIP × $1,225 + sponsors"},description:"World's largest creator economy expo with tiered Creator Pro / VIP / Corporate model."},
+{category:"Events & Experiences",subcategory:"Live Online Masterclass",kol_name:"74 Social Media & Marketing",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png",kol_followers:"~75K",product_name:"Live Lab: Create Your Social Media Reels",platform:"Eventbrite (online)",url:"https://www.eventbrite.com/e/live-lab-create-your-social-media-reels-interactive-workshop-tickets-1994882437070",price:"$97 (Live) / $147 (Live+Add-on)",revenue:{type:"estimated",amount:"$5,800/session",math:"40 Live × $97 + 20 Live+Add-on × $147"},description:"Hands-on 2-hour Zoom where attendees film real reels live, with collaborative editing upgrade."},
+{category:"Events & Experiences",subcategory:"Live Screening + Watch Party",kol_name:"Below Deck cast",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Bravo_2015_logo.svg/250px-Bravo_2015_logo.svg.png",kol_followers:"~12M franchise",product_name:"Below Deck Galley Watch Party Tour",platform:"Bravo / Eventbrite (city editions)",url:"https://www.bravotv.com/below-deck",price:"$65–$150/ticket",revenue:{type:"estimated",amount:"$500K–$1M per tour",math:"5 cities × 1,200 cap × $90 avg + VIP cocktails"},description:"Premium watch party tour combining episode screening, cast appearances, Q&A."},
+{category:"Events & Experiences",subcategory:"Conference / Summit",kol_name:"Colin & Samir",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/c/c6/Colin_Rosenblum.jpg",kol_followers:"1.62M YT",product_name:"Press Publish NYC — Creator Economy Summit",platform:"Smooth Media (own site)",url:"https://www.netinfluencer.com/colin-and-samir-to-host-one-day-creator-economy-summit-in-brooklyn-in-september/",price:"$400 (application-based)",revenue:{type:"estimated",amount:"$160K ticket + sponsor uplifts",math:"400 attendees × $400 + Microsoft/Adobe/YouTube sponsors"},description:"Curated single-track one-day creator summit with hands-on workshops + live Q&A."},
+{category:"Events & Experiences",subcategory:"Pop-up Shop",kol_name:"Emily Weiss (Glossier)",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Emily_Weiss_in_2017_03.jpg/240px-Emily_Weiss_in_2017_03.jpg",kol_followers:"Glossier 2.7M IG",product_name:"Glossier 'Realms of You' London Pop-Up",platform:"Glossier (own site)",url:"https://www.cosmeticsbusiness.com/glossier-opening-london-pop-up-inspired-by-you-fragrance",price:"Free entry (RSVP)",revenue:{type:"estimated",amount:"$2M–$3M in-store over 8 weeks",math:"6 guests × 8 hrs × 60 days × $700 avg basket"},description:"Two-month flagship London pop-up with ASMR rooms + live performances."},
+{category:"Events & Experiences",subcategory:"Live Dining Experience",kol_name:"The Regency Dining",kol_photo:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png",kol_followers:"~8K",product_name:"The Regency — Bridgerton-Inspired Immersive Dining",platform:"Eventbrite",url:"https://www.eventbrite.com/d/united-kingdom--cardiff/food-and-drink/",price:"£85 (3-course)",revenue:{type:"estimated",amount:"£5,950/sitting",math:"70 seats × £85 per dinner service"},description:"Period-costume immersive supper-club experience expanding across UK."}
+];
+
+const grid = document.getElementById('grid');
+const catBtns = document.querySelectorAll('.filters button[data-cat]');
+const search = document.getElementById('search');
+let activeCat = 'all';
+let activeSearch = '';
+
+function render() {
+  const filtered = ITEMS.filter(item => {
+    const catMatch = activeCat === 'all' || item.category === activeCat;
+    if (!catMatch) return false;
+    if (!activeSearch) return true;
+    const q = activeSearch.toLowerCase();
+    return (item.kol_name + ' ' + item.product_name + ' ' + item.platform + ' ' + item.subcategory).toLowerCase().includes(q);
+  });
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div class="empty">沒有符合的案例</div>';
+    return;
+  }
+  grid.innerHTML = filtered.map(item => {
+    const rev = item.revenue;
+    const revClass = rev.type === 'reported' ? 'rev' : 'rev est';
+    return `<article class="card">
+      <div class="pic">
+        <img src="${item.kol_photo}" alt="${item.kol_name}" loading="lazy" onerror="this.style.background='#222';this.style.opacity='.3'">
+        <span class="region">${item.kol_followers}</span>
+        <span class="cat">${item.category.replace(' & ', '/').replace(' Products', '')}</span>
+      </div>
+      <div class="body">
+        <h3 class="name">${item.kol_name}</h3>
+        <div class="sub">${item.subcategory}</div>
+        <p class="product">${item.description}</p>
+        <div class="meta">
+          <div class="row"><span>產品</span><b>${item.product_name}</b></div>
+          <div class="row"><span>價格</span><b>${item.price}</b></div>
+          <div class="row"><span>營收</span><span class="${revClass}" title="${rev.math}">${rev.amount}${rev.type === 'estimated' ? ' *' : ''}</span></div>
+        </div>
+        <div class="platform">${item.platform}</div>
+        <a class="src" href="${item.url}" target="_blank" rel="noopener">看商品頁 →</a>
+      </div>
+    </article>`;
+  }).join('');
+}
+
+catBtns.forEach(btn => btn.addEventListener('click', () => {
+  catBtns.forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeCat = btn.dataset.cat;
+  render();
+}));
+
+search.addEventListener('input', e => {
+  activeSearch = e.target.value;
+  render();
+});
+
+render();
+</script>
+
+</body>
+</html>
