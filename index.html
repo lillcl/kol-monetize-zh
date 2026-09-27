@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Monetize — 給想做生意、不只想接案的品牌創作者</title>
+<title>拿你的變現路徑 — 5 分鐘診斷，找出第一個該賣的產品</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -32,6 +32,11 @@ a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
 .cta-inline{display:inline-flex;gap:18px;align-items:center;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);flex-wrap:wrap}
 .cta-inline button{background:var(--ink);color:var(--paper);border:0;padding:16px 22px;cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;transition:background .2s}
 .cta-inline button:hover{background:var(--red)}
+
+.hero-points{display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;margin:0 0 36px;max-width:640px}
+.hero-points .point{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-top:1px solid var(--rule)}
+.hero-points .point b{font-family:var(--mono);font-size:11px;color:var(--red);font-weight:500;letter-spacing:.08em;flex:none;margin-top:4px}
+.hero-points .point span{font-family:var(--body);font-size:16px;line-height:1.5;color:var(--ink)}
 
 .case-section{padding:96px 0 80px;border-bottom:1px solid var(--rule);background:var(--paper-deep)}
 .case-section .head{max-width:1080px;margin:0 auto 24px;padding:0 32px;font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
@@ -202,6 +207,7 @@ footer{padding:24px 32px;border-top:1px solid var(--rule);display:flex;justify-c
 @media(max-width:600px){
   .hero{padding:56px 24px 40px}
   .hero h1{font-size:38px}
+  .hero-points{grid-template-columns:1fr;gap:0}
   .mini-grid{grid-template-columns:1fr}
   .tax-grid{grid-template-columns:1fr}
   .flow{grid-template-columns:1fr}
@@ -228,10 +234,18 @@ footer{padding:24px 32px;border-top:1px solid var(--rule);display:flex;justify-c
 <section class="hero">
   <div class="label">給想做生意、不只想接案的創作者</div>
   <h1>追蹤數不付<em>房租。</em></h1>
-  <p class="lede">給 KOL 的變現實戰手冊——看完你會知道：下一步該賣什麼、怎麼開始、誰做過一樣的事。</p>
+  <p class="lede">13 題、5 分鐘。做完你會拿到一條 5 步的變現路徑——每步都有具體產品、價格、平台、Day 1 該做什麼。基於 7 種變現機制 × 35 個真實案例。</p>
+
+  <div class="hero-points">
+    <div class="point"><b>01</b><span>你的第一個產品是什麼、定價多少</span></div>
+    <div class="point"><b>02</b><span>該在 Gumroad、Shopify 還是 Patreon 上架</span></div>
+    <div class="point"><b>03</b><span>3 位跟你機制最像的真實創作者</span></div>
+    <div class="point"><b>04</b><span>現在不要做哪些（即使你很想）</span></div>
+  </div>
+
   <div class="cta-inline">
-    <button onclick="openDiag()">開始診斷 →</button>
-    <span>13 題 · 約 5 分鐘</span>
+    <button onclick="openDiag()">拿我的變現路徑 →</button>
+    <span>13 題 · 5 分鐘 · 立刻拿到結果</span>
   </div>
 </section>
 
@@ -374,9 +388,9 @@ footer{padding:24px 32px;border-top:1px solid var(--rule);display:flex;justify-c
 </section>
 
 <section class="final">
-  <h2>下一步該賣什麼？</h2>
-  <p>13 題、實證加權、自動分支。診斷結果直接告訴你：第一個產品是什麼、Day 1 該做什麼、現成的文案怎麼寫，以及三個跟你機制相近的真實創作者。</p>
-  <button onclick="openDiag()">開始診斷 →</button>
+  <h2>你的下一步，<em>在 5 分鐘後。</em></h2>
+  <p>不用註冊、不用留 email、不用給真名。13 題結束，視覺化結果就在眼前。</p>
+  <button onclick="openDiag()">拿我的變現路徑 →</button>
   <div class="meta">© Monetize · Vol. 01 · 香港</div>
 </section>
 
