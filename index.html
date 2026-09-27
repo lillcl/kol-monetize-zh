@@ -108,7 +108,14 @@ footer{padding:24px 32px;border-top:1px solid var(--rule);display:flex;justify-c
 .diag-evidence b{color:var(--red);font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-right:8px}
 .diag-opts{display:grid;gap:8px;margin-bottom:24px}
 .diag-opts.c2{grid-template-columns:1fr 1fr}
+.diag-inputs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
+.diag-input{border:1px solid var(--ink);background:transparent;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.diag-input label{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.diag-input input{font-family:var(--mono);font-size:18px;font-weight:500;color:var(--ink);background:transparent;border:0;outline:none;width:100%;padding:0;letter-spacing:0}
+.diag-input input::placeholder{color:var(--muted);opacity:.4}
 .diag-opt{border:1px solid var(--ink);background:transparent;padding:13px 16px;text-align:left;cursor:pointer;font-family:var(--body);font-size:16px;transition:background .12s,color .12s;line-height:1.35;color:var(--ink)}
+.diag-opt input,.diag-q-fields input{font-family:var(--mono);font-size:13px;color:var(--ink);background:transparent;border:0;outline:none;width:100%;padding:0;letter-spacing:0}
+.diag-q-fields input::placeholder{color:var(--muted);opacity:.5;letter-spacing:0}
 .diag-opt:hover{background:var(--ink);color:var(--paper)}
 .diag-opt.sel{background:var(--ink);color:var(--paper)}
 .diag-opt .check{display:inline-block;width:16px;margin-right:8px;color:var(--red);font-family:var(--mono)}
@@ -791,7 +798,7 @@ function renderQ() {
   html += `<h2 class="diag-q">${q.q}</h2><div class="diag-sub">${q.sub}</div>`;
 
   if (q.type === 'number') {
-    html += `<div class="diag-opts" style="grid-template-columns:1fr 1fr">${q.fields.map(f => `<input class="diag-opt" style="cursor:text;font-family:var(--mono);font-size:13px;letter-spacing:.04em;color:var(--ink)" placeholder="${f.ph}" data-field="${f.lab}">`).join('')}</div>`;
+    html += `<div class="diag-inputs">${q.fields.map(f => `<div class="diag-input"><label>${f.lab}</label><input type="number" inputmode="numeric" placeholder="${f.ph}" data-field="${f.lab}"></div>`).join('')}</div>`;
   } else if (q.type === 'single') {
     const cls = q.opts.length > 5 ? 'c2' : '';
     html += `<div class="diag-opts ${cls}">${q.opts.map(o => {
@@ -808,24 +815,40 @@ function renderQ() {
     }).join('')}</div>`;
   }
 
-  html += `<div class="diag-foot"><div class="l"><button onclick="qBack()" ${qStep===0?'disabled style="opacity:.3"':''}>← 上一題</button><button class="skip" onclick="qSkip()">略過</button></div><div class="r"><button class="primary" onclick="qNext()" id="diagNext">${qStep === flow.length - 1 ? '看診斷結果 →' : '繼續 →'}</button></div></div>`;
+  html += `<div class="diag-foot"><div class="l"><button onclick="qBack()" ${qStep===0?'disabled style="opacity:.3"':''}>← 上一題</button><button class="skip" onclick="qSkip()">略過</button></div><div class="r"><button class="primary" onclick="qNext()" id="diagNext" disabled style="opacity:.4">${qStep === flow.length - 1 ? '看診斷結果 →' : '繼續 →'}</button></div></div>`;
   body.innerHTML = html;
+
+  updateButtonState();
 
   if (q.type === 'number') {
     q.fields.forEach(f => {
       const inp = body.querySelector(`[data-field="${f.lab}"]`);
       inp.addEventListener('input', e => {
         answers[q.id] = {...(answers[q.id] || {}), [f.lab]: e.target.value};
+        updateButtonState();
       });
     });
   }
+}
+
+function updateButtonState() {
+  const btn = document.getElementById('diagNext');
+  if (!btn) return;
+  const q = flow[qStep];
+  const ans = answers[q.id];
+  let ok = true;
+  if (q.type === 'single') ok = !!ans;
+  else if (q.type === 'multi') ok = Array.isArray(ans) && ans.length > 0;
+  else if (q.type === 'number') ok = ans && Object.values(ans).some(v => v !== '' && v != null);
+  btn.disabled = !ok;
+  btn.style.opacity = ok ? '1' : '.4';
 }
 
 function pick(btn, val) {
   answers[flow[qStep].id] = val;
   body.querySelectorAll('.diag-opt').forEach(b => b.classList.remove('sel'));
   btn.classList.add('sel');
-  setTimeout(advance, 220);
+  updateButtonState();
 }
 
 function pickMulti(btn, val) {
@@ -840,6 +863,7 @@ function pickMulti(btn, val) {
     btn.classList.add('sel');
     btn.querySelector('.check').textContent = '✓';
   }
+  updateButtonState();
 }
 
 function qBack() { if (qStep > 0) { qStep--; renderQ(); } else closeDiag(); }
