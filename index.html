@@ -1,0 +1,878 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monetize — 給想做生意、不只想接案的品牌創作者</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0E0F11;--paper:#F4F1EA;--paper-deep:#EAE5D6;--rule:#D8D2C4;
+  --muted:#6B6557;--red:#D2453A;--green:#3A5A40;
+  --max:680px;--display:'Fraunces','Noto Serif TC',ui-serif,Georgia,serif;
+  --body:'Newsreader','Noto Serif TC',ui-serif,Georgia,serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);font:19px/1.65 var(--body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{font-feature-settings:"palt"}
+a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
+::selection{background:var(--ink);color:var(--paper)}
+
+.mast{padding:14px 32px;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.mast b{color:var(--ink);letter-spacing:.18em}
+
+.hero{padding:96px 32px 56px;border-bottom:1px solid var(--rule)}
+.hero .label{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:24px}
+.hero h1{font-family:var(--display);font-size:clamp(40px,6.4vw,80px);line-height:1;letter-spacing:-.04em;font-weight:500;margin:0 0 24px;max-width:14ch}
+.hero h1 em{font-style:italic;font-weight:400;color:var(--red)}
+.hero .lede{font-size:21px;line-height:1.55;max-width:36ch;color:var(--ink);font-weight:400;margin:0 0 32px}
+.cta-inline{display:inline-flex;gap:18px;align-items:center;font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);flex-wrap:wrap}
+.cta-inline button{background:var(--ink);color:var(--paper);border:0;padding:16px 22px;cursor:pointer;font-family:inherit;font-size:inherit;letter-spacing:inherit;text-transform:inherit;transition:background .2s}
+.cta-inline button:hover{background:var(--red)}
+
+.case-section{padding:96px 0 80px;border-bottom:1px solid var(--rule);background:var(--paper-deep)}
+.case-section .head{max-width:1080px;margin:0 auto 24px;padding:0 32px;font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.case-grid{display:grid;grid-template-columns:340px 1fr;gap:64px;max-width:1080px;margin:0 auto;padding:0 32px;align-items:start}
+.case-pic{aspect-ratio:3/4;overflow:hidden;position:relative;background:#222}
+.case-pic img{width:100%;height:100%;object-fit:cover;filter:grayscale(.12) contrast(1.05)}
+.case-pic .tag{position:absolute;top:14px;left:14px;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:7px 10px}
+.case-body h2{font-family:var(--display);font-size:42px;line-height:1.05;letter-spacing:-.03em;font-weight:500;margin:0 0 6px}
+.case-body .role{font-style:italic;color:var(--muted);font-size:18px;margin-bottom:24px}
+.case-body h5{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin:28px 0 8px;font-weight:500}
+.case-body h5:first-of-type{margin-top:0}
+.case-body p{margin:0 0 14px;font-size:18px}
+.case-body .quote{border-left:2px solid var(--red);padding-left:18px;font-style:italic;color:var(--muted);margin:20px 0;font-size:18px}
+.flow{display:grid;grid-template-columns:repeat(5,1fr);border:1px solid var(--ink);margin:24px 0}
+.flow .stage{padding:14px 12px;border-right:1px solid var(--ink);font-family:var(--mono);font-size:11px;color:var(--muted)}
+.flow .stage:last-child{border-right:0;background:var(--ink);color:var(--paper)}
+.flow .stage b{display:block;font-family:var(--display);font-size:17px;color:var(--ink);margin-bottom:4px;font-weight:500;letter-spacing:-.01em}
+.flow .stage:last-child b{color:var(--paper)}
+.price-strip{display:flex;gap:24px;padding:14px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:24px 0;font-family:var(--mono);font-size:12px;color:var(--muted);flex-wrap:wrap}
+.price-strip div b{display:block;color:var(--red);font-size:18px;font-weight:500}
+
+.more-cases{padding:80px 0 64px;border-bottom:1px solid var(--rule)}
+.more-cases .head{max-width:1080px;margin:0 auto 24px;padding:0 32px;font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.more-cases h3{font-family:var(--display);font-size:32px;line-height:1.1;letter-spacing:-.02em;font-weight:500;margin:0 auto 32px;max-width:1080px;padding:0 32px;max-width:24ch}
+.more-cases h3 em{font-style:italic;color:var(--red);font-weight:400}
+.mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1080px;margin:0 auto;padding:0 32px}
+.mini{border:1px solid var(--ink);background:var(--paper);padding:0;display:flex;flex-direction:column;transition:transform .2s}
+.mini:hover{transform:translateY(-2px)}
+.mini .pic{aspect-ratio:4/3;overflow:hidden;background:#222;position:relative}
+.mini .pic img{width:100%;height:100%;object-fit:cover;filter:grayscale(.12) contrast(1.05)}
+.mini .pic .region{position:absolute;bottom:10px;left:10px;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:10px;letter-spacing:.12em;padding:5px 8px;text-transform:uppercase}
+.mini .content{padding:20px;flex:1;display:flex;flex-direction:column}
+.mini h4{font-family:var(--display);font-size:22px;font-weight:500;margin:0 0 4px;letter-spacing:-.02em}
+.mini .mech{font-style:italic;color:var(--muted);font-size:14px;margin-bottom:12px;font-family:var(--display)}
+.mini .prices{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--rule);line-height:1.7}
+.mini .prices b{color:var(--red);font-weight:500}
+.mini p{font-size:15px;line-height:1.55;margin:0 0 12px;color:var(--ink)}
+.mini .copy{font-style:italic;color:var(--red);font-size:14px;margin:0;padding-top:10px;border-top:1px solid var(--rule);margin-top:auto}
+.mini .copy b{font-style:normal;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;display:block;margin-bottom:4px}
+
+.tax{padding:96px 0 80px;border-bottom:1px solid var(--rule)}
+.tax .pad{padding:0 32px;max-width:1080px;margin:0 auto}
+.tax .head{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.tax h2{font-family:var(--display);font-size:42px;line-height:1.1;letter-spacing:-.03em;font-weight:500;margin:0 0 32px;max-width:18ch}
+.tax h2 em{font-style:italic;color:var(--red);font-weight:400}
+.tax-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink);border-left:1px solid var(--ink)}
+.tax-cell{padding:24px 22px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.tax-cell .n{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--red);margin-bottom:8px}
+.tax-cell h6{font-family:var(--display);font-size:22px;margin:0 0 6px;font-weight:500;letter-spacing:-.02em}
+.tax-cell .one{font-size:15px;line-height:1.5;color:var(--muted);margin-bottom:8px}
+.tax-cell .ex{font-family:var(--mono);font-size:11px;color:var(--ink);padding-top:8px;border-top:1px solid var(--rule)}
+
+.final{padding:96px 32px;background:var(--ink);color:var(--paper);text-align:center}
+.final h2{font-family:var(--display);font-size:clamp(36px,5vw,64px);line-height:1.1;letter-spacing:-.03em;margin:0 auto 16px;max-width:18ch;font-weight:500}
+.final h2 em{font-style:italic;color:var(--red);font-weight:400}
+.final p{max-width:38ch;margin:0 auto 28px;font-size:19px;color:rgba(244,241,234,.7);line-height:1.6}
+.final button{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;background:var(--red);color:var(--paper);border:0;padding:20px 32px;cursor:pointer;transition:background .2s}
+.final button:hover{background:var(--paper);color:var(--ink)}
+.final .meta{margin-top:48px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(244,241,234,.4)}
+
+footer{padding:24px 32px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+.diag-overlay{position:fixed;inset:0;background:rgba(14,15,17,.92);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:24px;z-index:100}
+.diag-overlay.open{display:flex}
+.diag-shell{background:var(--paper);max-width:640px;width:100%;max-height:92vh;overflow-y:auto;position:relative}
+.diag-head{padding:24px 32px 16px;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:var(--paper);z-index:2}
+.diag-head .label{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--red)}
+.diag-head .prog{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--muted)}
+.diag-head .close{background:transparent;border:0;font-size:22px;cursor:pointer;color:var(--ink);line-height:1;padding:4px 8px}
+.diag-body{padding:32px;display:flex;flex-direction:column;min-height:380px}
+.diag-q{font-family:var(--display);font-size:28px;line-height:1.25;letter-spacing:-.02em;font-weight:500;margin:0 0 8px}
+.diag-sub{color:var(--muted);font-style:italic;margin-bottom:24px;font-size:16px;line-height:1.55}
+.diag-evidence{margin-bottom:16px;padding:10px 14px;border-left:3px solid var(--red);background:var(--paper-deep);font-family:var(--mono);font-size:11px;color:var(--ink);line-height:1.5}
+.diag-evidence b{color:var(--red);font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-right:8px}
+.diag-opts{display:grid;gap:8px;margin-bottom:24px}
+.diag-opts.c2{grid-template-columns:1fr 1fr}
+.diag-opt{border:1px solid var(--ink);background:transparent;padding:13px 16px;text-align:left;cursor:pointer;font-family:var(--body);font-size:16px;transition:background .12s,color .12s;line-height:1.35;color:var(--ink)}
+.diag-opt:hover{background:var(--ink);color:var(--paper)}
+.diag-opt.sel{background:var(--ink);color:var(--paper)}
+.diag-opt .check{display:inline-block;width:16px;margin-right:8px;color:var(--red);font-family:var(--mono)}
+.diag-opt.sel .check{color:var(--paper)}
+.diag-foot{margin-top:auto;padding-top:20px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;gap:10px}
+.diag-foot .l,.diag-foot .r{display:flex;gap:8px;align-items:center}
+.diag-foot button{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;background:transparent;color:var(--ink);border:1px solid var(--ink);padding:10px 16px;cursor:pointer;transition:background .12s,color .12s}
+.diag-foot button.primary{background:var(--ink);color:var(--paper)}
+.diag-foot button.primary:hover{background:var(--red);border-color:var(--red)}
+.diag-foot button.skip{border:0;color:var(--muted);padding:10px 12px}
+
+.result{padding:32px;background:var(--paper)}
+.result h3{font-family:var(--display);font-size:32px;margin:0 0 4px;letter-spacing:-.02em;font-weight:500}
+.result .sub{color:var(--muted);font-style:italic;margin-bottom:18px;font-size:15px}
+.evidence-block{background:var(--ink);color:var(--paper);padding:20px 22px;margin-bottom:18px}
+.evidence-block .lab{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+.evidence-block h4{font-family:var(--display);font-size:26px;margin:0 0 6px;font-weight:500;letter-spacing:-.01em}
+.evidence-block .conf{font-family:var(--mono);font-size:11px;color:rgba(244,241,234,.6);margin-bottom:10px}
+.evidence-block .why{font-size:15px;line-height:1.6;color:rgba(244,241,234,.85);margin:0}
+.product-list{margin:18px 0;counter-reset:pp}
+.product{padding:18px 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:36px 1fr;gap:14px}
+.product:first-of-type{background:var(--paper-deep);padding:18px;margin:0 -18px 0;border:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.product .n{font-family:var(--mono);font-size:14px;color:var(--red);font-weight:500;letter-spacing:.04em}
+.product .name{font-family:var(--display);font-size:22px;font-weight:500;margin-bottom:4px;letter-spacing:-.01em}
+.product .meta{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:10px;letter-spacing:.04em}
+.product .meta b{color:var(--red);font-weight:500}
+.product .day{font-size:15px;line-height:1.6;margin:0 0 8px}
+.product .day b{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:block;margin-bottom:4px}
+.product .copy{font-style:italic;color:var(--muted);font-size:15px;margin:0;padding:10px 14px;border-left:2px solid var(--rule)}
+.product .gate{font-family:var(--mono);font-size:11px;color:var(--ink);margin-top:8px}
+.product .gate b{color:var(--green);font-weight:500;letter-spacing:.06em;text-transform:uppercase;margin-right:6px}
+.dont-list{margin:18px 0;padding:18px;background:rgba(210,69,58,.05);border-left:3px solid var(--red)}
+.dont-list h6{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--red);margin:0 0 10px}
+.dont-list ul{margin:0;padding:0;list-style:none}
+.dont-list li{padding:6px 0;font-size:15px;color:var(--ink);border-bottom:1px solid var(--rule);line-height:1.55}
+.dont-list li:last-child{border-bottom:0}
+.benchmarks{margin:18px 0;padding-top:18px;border-top:1px solid var(--rule)}
+.benchmarks h6{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
+.bm-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--rule)}
+.bm-row img{width:48px;height:48px;object-fit:cover;flex:none;background:#222}
+.bm-row .name{font-family:var(--display);font-size:17px;font-weight:500;margin-bottom:2px}
+.bm-row .mech{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.bm-row .pct{margin-left:auto;font-family:var(--display);font-size:24px;font-weight:500;color:var(--red)}
+
+@media(max-width:900px){
+  .case-grid{grid-template-columns:1fr;gap:24px;padding:0 24px}
+  .case-body h2{font-size:32px}
+  .flow{grid-template-columns:1fr 1fr}
+  .flow .stage:nth-child(2n){border-right:0}
+  .flow .stage:nth-child(-n+3){border-bottom:1px solid var(--ink)}
+  .mini-grid{grid-template-columns:1fr 1fr}
+  .tax-grid{grid-template-columns:1fr 1fr}
+  .case-section,.tax,.more-cases{padding:64px 0 56px}
+}
+@media(max-width:600px){
+  .hero{padding:56px 24px 40px}
+  .hero h1{font-size:38px}
+  .mini-grid{grid-template-columns:1fr}
+  .tax-grid{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr}
+  .flow .stage{border-right:0!important;border-bottom:1px solid var(--ink)}
+  .flow .stage:last-child{border-bottom:0}
+  .diag-shell{max-height:100vh;height:100vh}
+  .diag-q{font-size:24px}
+  .diag-body{padding:24px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="mast">
+  <b>Monetize.</b>
+  <span>Vol. 01 · 創作者實戰手冊</span>
+</div>
+
+<section class="hero">
+  <div class="label">給想做生意、不只想接案的創作者</div>
+  <h1>追蹤數不付<em>房租。</em></h1>
+  <p class="lede">一份給認真想打造自家品牌的 KOL 的實戰手冊——拆解六種變現機制，並用 13 題診斷告訴你，你的內容裡已經藏著哪一種。</p>
+  <div class="cta-inline">
+    <button onclick="openDiag()">開始診斷 →</button>
+    <span>13 題 · 約 5 分鐘</span>
+  </div>
+</section>
+
+<section class="case-section">
+  <div class="head">個案研究 · 01</div>
+  <div class="case-grid">
+    <div class="case-pic">
+      <img src="https://cdn2.sagefinder.com/assets/users/large/2130031.jpg?r=862028" alt="Emma Chamberlain">
+      <span class="tag">US · Mega</span>
+    </div>
+    <div class="case-body">
+      <h2>Emma Chamberlain</h2>
+      <div class="role">生活儀式 → 可回購的消耗品</div>
+
+      <h5>她實際在賣什麼</h5>
+      <p>咖啡和抹茶。準確地說，是她在鏡頭前每天重複的那個生活儀式，被包裝成產品。<strong>產品本身，就是那個習慣。</strong></p>
+
+      <h5>她的變現路徑</h5>
+      <div class="flow">
+        <div class="stage"><b>免費內容</b>日常 vlog 裡的咖啡儀式</div>
+        <div class="stage"><b>入門</b>Cold Brew Starter · $44</div>
+        <div class="stage"><b>回購</b>咖啡 / 抹茶補給</div>
+        <div class="stage"><b>組合包</b>Starter 加配件</div>
+        <div class="stage"><b>提高客單</b>大容量組合 · $80–99</div>
+      </div>
+
+      <h5>為何有效</h5>
+      <p>粉絲追蹤的是<em>她本人</em>。產品是一種延伸陪伴關係的方式——讓你能在自家廚房參與她那個早晨儀式。</p>
+      <div class="quote">她賣的不是咖啡。她賣的是「週二早晨，她在廚房煮咖啡」的那個版本。</div>
+
+      <div class="price-strip">
+        <div>抹茶<b>$30</b></div>
+        <div>咖啡<b>$20</b></div>
+        <div>Starter Pack<b>$44–72</b></div>
+        <div>組合包<b>$80–99</b></div>
+        <div>回購週期<b>每 3–4 週</b></div>
+      </div>
+
+      <h5>值得抄的部分</h5>
+      <p><strong>習慣 → 消耗品 → 回購</strong>這個 pattern。如果你的內容每天示範某個儀式，那個儀式就是產品。</p>
+
+      <h5>不要照抄的部分</h5>
+      <p>自己開咖啡品牌。Emma 的供應鏈花了多年時間與資金。多數創作者應該先用數位產品或預購驗證需求。</p>
+    </div>
+  </div>
+</section>
+
+<section class="more-cases">
+  <div class="head">個案研究 · 02–06</div>
+  <h3>五位創作者，<em>五種機制。</em></h3>
+  <div class="mini-grid">
+
+    <div class="mini">
+      <div class="pic">
+        <img src="https://i.insider.com/63bd464423f3620019879262?format=jpeg&width=1200" alt="Grace Beverley">
+        <span class="region">UK · Mega</span>
+      </div>
+      <div class="content">
+        <h4>Grace Beverley</h4>
+        <div class="mech">專業力 → 數位階梯 + 自有品牌</div>
+        <div class="prices">Productivity Method course <b>—</b><br>TALA 創辦人系列 <b>—</b></div>
+        <p>兩條平行事業線：教專業的數位產品線（planner → 課程 → flagship），以及把她本人穿搭商品化的 TALA 服飾線。</p>
+        <div class="copy"><b>值得抄</b>如果你的內容有教學價值，就該有階梯——永遠不要從頂端開始賣。</div>
+      </div>
+    </div>
+
+    <div class="mini">
+      <div class="pic">
+        <img src="https://bookingagentinfo.com/wp-content/uploads/2020/12/Moriah-Elizabeth.jpg" alt="Moriah Elizabeth">
+        <span class="region">US · Mega</span>
+      </div>
+      <div class="content">
+        <h4>Moriah Elizabeth</h4>
+        <div class="mech">IP → 收藏品生態系</div>
+        <div class="prices">吊飾 <b>$15</b> · 迷你 plush <b>$25</b><br>Plush <b>$30</b> · Pickle 家族包 <b>$76</b></div>
+        <p>同一個 IP（Pickles 家族），五個價格帶，從吊飾到家族組合包。內容裡反覆出現的角色就是護城河。</p>
+        <div class="copy"><b>值得抄</b>先讓觀眾記住一個反覆出現的角色 / 物件，再把它做成不同價位的產品。</div>
+      </div>
+    </div>
+
+    <div class="mini">
+      <div class="pic">
+        <img src="https://cdn.hk01.com/di/media/images/dw/20210527/474726576903557120715468.jpeg/oY1BMzOqSvw85m_1mF_oEwUn9KtyqBgShOVjFYTlYxU?v=w1920" alt="Coffee Lam 林芊妤">
+        <span class="region">HK · Large</span>
+      </div>
+      <div class="content">
+        <h4>Coffee Lam 林芊妤</h4>
+        <div class="mech">專業力 → 自有服飾品牌</div>
+        <div class="prices">CoffeeSweat 瑜伽服飾 <b>—</b></div>
+        <p>多年的瑜伽教學內容累積了信任，產品來自觀眾反覆投訴的痛點：找不到合適的小胸瑜伽內衣。</p>
+        <div class="copy"><b>值得抄</b>去翻你的留言區——觀眾一直問的問題，往往就是你的產品。</div>
+      </div>
+    </div>
+
+    <div class="mini">
+      <div class="pic">
+        <img src="https://proassetspdlcom.cdnstatics2.com/usuaris/autores/fotos/86/original/000085366_1_AliAbdaal-nocreditneeded_202407111615.png" alt="Ali Abdaal">
+        <span class="region">UK · Mega</span>
+      </div>
+      <div class="content">
+        <h4>Ali Abdaal</h4>
+        <div class="mech">專業力 → 高價教育</div>
+        <div class="prices">YouTube OS <b>$27</b> · 組合包 <b>$56</b><br>Camera Confidence <b>$149</b> · PTYA <b>$995</b></div>
+        <p>一個精心設計的數位階梯：免費內容 → 低價數位 → 中價課 → flagship。每一步教觀眾下一步存在。</p>
+        <div class="copy"><b>值得抄</b>低價數位產品是研究、不是營收——認真看待它給你的數據。</div>
+      </div>
+    </div>
+
+    <div class="mini">
+      <div class="pic">
+        <img src="https://v3-statics.mirrormedia.mg/images/c9350e8a-d218-43ac-92ed-86624bbd1126.jpg" alt="滴妹">
+        <span class="region">TW · Large</span>
+      </div>
+      <div class="content">
+        <h4>滴妹</h4>
+        <div class="mech">人格 → 高頻回購 FMCG</div>
+        <div class="prices">NAP TEA 再睡5分鐘 <b>—</b></div>
+        <p>鮮明的人格 × 溫柔慵懶的品牌調性 → 一個進入便利商店的茶飲品牌。粉絲買的不是茶，是「喝她同款茶的自己」。</p>
+        <div class="copy"><b>值得抄</b>如果你的品牌調性夠強，找那個調性暗示的消耗品。</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="tax">
+  <div class="pad">
+    <div class="head">框架 · 六種變現機制</div>
+    <h2>每個創作者生意背後，都是<em>六種模式</em>之一。</h2>
+    <div class="tax-grid">
+      <div class="tax-cell"><div class="n">M-01</div><h6>人格型</h6><div class="one">粉絲追蹤的是<em>你本人</em>。產品是延伸關係——寫真、會員、活動。</div><div class="ex">Moriah · Ryan Trahan</div></div>
+      <div class="tax-cell"><div class="n">M-02</div><h6>生活方式型</h6><div class="one">粉絲想活得像你。產品是生活中的那個消耗品。</div><div class="ex">Emma · Pamela · 滴妹</div></div>
+      <div class="tax-cell"><div class="n">M-03</div><h6>專業教學型</h6><div class="one">粉絲來學習。產品是結構化的能力——指南、課程、諮詢。</div><div class="ex">Ali Abdaal · Coffee Lam</div></div>
+      <div class="tax-cell"><div class="n">M-04</div><h6>審美編輯型</h6><div class="one">粉絲想要你的品味。產品是一份精選編輯。</div><div class="ex">Matilda Djerf · Molly-Mae</div></div>
+      <div class="tax-cell"><div class="n">M-05</div><h6>信任推薦型</h6><div class="one">粉絲相信你的判斷。產品是推薦、編輯、答案。</div><div class="ex">黎貝卡 · NikkieTutorials</div></div>
+      <div class="tax-cell"><div class="n">M-06</div><h6>社群經營型</h6><div class="one">粉絲追蹤彼此。產品是進入權——會員、直播、活動。</div><div class="ex">李子柒 · 滇西小哥</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <h2>找出你的內容<em>已經是</em>哪一種。</h2>
+  <p>13 題、實證加權、會自動分支。診斷結果會直接告訴你：你的第一個產品、Day 1 該做的動作、現成的文案模板，以及三個機制相近的真實創作者案例。</p>
+  <button onclick="openDiag()">開始診斷 →</button>
+  <div class="meta">© Monetize · Vol. 01 · 香港</div>
+</section>
+
+<footer>
+  <div>Monetize. Vol. 01</div>
+  <div>2026 年 9 月</div>
+</footer>
+
+<div class="diag-overlay" id="diag">
+  <div class="diag-shell">
+    <div class="diag-head">
+      <div>
+        <div class="label" id="diagLabel">第一階段 · 定位</div>
+        <div class="prog" id="diagProg">第 1 / 13 題</div>
+      </div>
+      <button class="close" onclick="closeDiag()">×</button>
+    </div>
+    <div class="diag-body" id="diagBody"></div>
+  </div>
+</div>
+
+<script>
+const EVIDENCE = { A: 1.0, B: 0.7, C: 0.5, D: 0.2 };
+
+const PRODUCTS = {
+  人格型: [
+    { name: '數位寫真組', price: 'HK$48–98', platform: 'Gumroad 或 Ko-fi',
+      day: '打開你的照片資料夾。挑 8–12 張已經表現最好的照片。整理成一份 PDF 或相片包，上傳 Gumroad，售價 HK$68。文案：「那組我一直捨不得發的照片。」',
+      copy: '我終於整理好了。那組你們一直問的照片。',
+      gate: '售出 30 組，或 5% Story 觀看轉換率' },
+    { name: '每月幕後花絮', price: 'HK$28–58 / 月', platform: 'Patreon 或 Instagram 訂閱',
+      day: '每月錄一支 10 分鐘的幕後影片。只放在 Patreon。每月對 IG 公開宣傳一次當月新片。',
+      copy: '那個不會出現在主版位的版本。',
+      gate: '連續 3 個月有 50 位活躍訂閱者' },
+    { name: '簽名拍立得 / 藝術微噴', price: 'HK$128–288', platform: 'Shopify 預購',
+      day: '挑 10 張照片，印成拍立得或 8×10。每張親筆簽名。Shopify 上架預購，限 30 組。',
+      copy: '10 張。親簽。一次限定。',
+      gate: '48 小時內完售' },
+    { name: 'Premium 會員等級', price: 'HK$58 / 月', platform: 'Fourthwall 或 Patreon',
+      day: '把幕後花絮 + 每月限定的直播 + 所有新品的早鳥權打包在一起。',
+      copy: '我做的一切，你先看到。',
+      gate: '連續 2 個月有 200 位會員' },
+    { name: 'VIP 見面會', price: 'HK$688–1,500', platform: 'Eventbrite 或本地票務',
+      day: '選一個城市，限 30 人。包含合照、簽名照、60 分鐘 Q&A。會員優先購票。',
+      copy: '30 個位。一個房間。一個晚上。',
+      gate: '完售後再考慮第二個城市' }
+  ],
+  生活方式型: [
+    { name: '每日儀式指南', price: 'HK$48–98', platform: 'Gumroad 或 Ko-fi',
+      day: '挑一個你會在鏡頭前重複做的儀式（晨間咖啡、護膚流程、穿搭順序）。一步步拆解，做成 12 頁 PDF。售 HK$68。',
+      copy: '那個儀式，拆解給你。',
+      gate: '售出 50 份' },
+    { name: '入門組合包', price: 'HK$128–298', platform: 'Shopify',
+      day: '蒐集 3–5 個搭配那個儀式的產品（1 個主角 + 2 配件）。組合包比單買便宜 20%。滿 HK$300 免運。',
+      copy: '儀式裡的所有東西，一箱打包。',
+      gate: '售出 40 組，4.5 星以上' },
+    { name: '消耗品訂閱', price: 'HK$38–98 / 月', platform: 'Shopify Subscription',
+      day: '挑一個會用完的消耗品（咖啡、保健食品、護膚品）。每月自動配送，9 折優惠。出貨前 5 天提醒。',
+      copy: '永遠不缺貨。',
+      gate: '100 位活躍訂閱者' },
+    { name: '季節膠囊', price: 'HK$198–688', platform: 'Shopify',
+      day: '4–8 件搭配季節的膠囊。只開賣 7 天。開賣當天寄信給名單，第 7 天關閉。',
+      copy: '八件。七天。就這樣。',
+      gate: '7 天內售出 70%' },
+    { name: '創辦人限定版', price: 'HK$688–1,500', platform: 'Shopify 或限時現場',
+      day: '從膠囊裡挑出最受歡迎的那件，重新製作。編號、簽名、手寫卡片。限 50 件。會員先買。',
+      copy: '50 件。編號。我親簽的。',
+      gate: '24 小時內售罄' }
+  ],
+  專業教學型: [
+    { name: '數位指南', price: 'HK$48–98', platform: 'Gumroad',
+      day: '打開你的 DM 收件匣。找你已經回答過 5 次以上的問題，把它完整寫下來——你希望可以直接貼給別人的版本。售 HK$68。',
+      copy: '我在 DM 重複回答的答案，整成一份 PDF。',
+      gate: '寫下一份前先賣出 40 份' },
+    { name: '工具包 / 模板包', price: 'HK$128–298', platform: 'Gumroad 或 Notion',
+      day: '把指南背後的工作流（Notion 模板、表格、清單）單獨打包，售 HK$198。定位為「真正的工具，不只是說明」。',
+      copy: '是系統，不只是建議。',
+      gate: '組合包轉換率超過 8%' },
+    { name: '小型課程', price: 'HK$298–588', platform: 'Teachable 或 Thinkific',
+      day: '指南 + 工具包，再加上 4–6 支影片（每支 20 分鐘），實際示範如何應用。5 天 launch。',
+      copy: '指南裡的東西，一步一步帶你做。',
+      gate: '首次 launch 售出 35 個' },
+    { name: '旗艦課程', price: 'HK$688–1,500', platform: 'Kajabi 或 Teachable',
+      day: '從最受歡迎的小課延伸，加上 cohort 直播、更深的模板、私密社群。每年開兩次，名單預購優先。',
+      copy: '完整版。一年兩次。cohort 制。',
+      gate: '兩個 launch 各 150 位學員' },
+    { name: '工作坊 / 共學', price: 'HK$888–2,500', platform: 'Eventbrite + Zoom',
+      day: '限 25 人，4 週，每週 90 分鐘直播。同儕互評，最後有成果產出。售 HK$1,288。',
+      copy: '25 個位。4 週。一個成果。',
+      gate: '完售且 4.7 星以上再排下一梯' }
+  ],
+  審美編輯型: [
+    { name: '創辦人精選', price: '免費，引流至商店', platform: 'Shopify 店面',
+      day: '挑 10–15 件你真正會穿戴的單品。拍平拍或穿搭照。做成 Shopify 一個叫「My Favorites」的 collection。bio 連結過去。',
+      copy: '我身上的東西，全部連結在這。',
+      gate: 'bio 點擊率 5% 以上' },
+    { name: '造型 Zine', price: 'HK$48–128', platform: 'Gumroad 或 Shopify',
+      day: '紙本或 PDF。24 頁。一季穿搭拍立得，附說明與購買連結。',
+      copy: '一整季，拍下來。',
+      gate: '售出 200 本' },
+    { name: '膠囊系列', price: 'HK$198–498', platform: 'Shopify',
+      day: '設計或代工 6–12 件你美學裡的單品。開賣 5 天，用 Zine 作為 lookbook。',
+      copy: '六件。一次上。五天。',
+      gate: '60% 售出率' },
+    { name: '招牌單品', price: 'HK$488–1,200', platform: 'Shopify',
+      day: '膠囊系列裡最受歡迎的那件，用更好布料重製。編號。名單先買。',
+      copy: '那件單品，重製。編號。',
+      gate: '24 小時內售罄' },
+    { name: '個人造型諮詢', price: 'HK$888–2,000', platform: 'Calendly + Zoom',
+      day: '每月開放 10 個 slot。60 分鐘視訊。對方傳照片，你根據身形 + 預算搭一個膠囊。售 HK$1,288。',
+      copy: '我用 Zoom 幫你整理衣櫃。每月 10 個。',
+      gate: '連續 2 個月預約額滿' }
+  ],
+  信任推薦型: [
+    { name: '編輯推薦指南', price: 'HK$48–98', platform: 'Gumroad',
+      day: '挑一個觀眾一直問你的類別（護膚、旅遊、餐廳）。編輯 20 件，每件寫一句推薦理由。',
+      copy: '我真正在用的 20 件 [類別]。附原因。',
+      gate: '售出 50 份' },
+    { name: '自有產品（入門）', price: 'HK$44–128', platform: 'Shopify 或 Gumroad',
+      day: '找到那個類別裡的缺口。一個你希望存在但找不到的產品。代工或共創。售 HK$88。預購驗證。',
+      copy: '那個我找不到的東西，我自己做了。',
+      gate: '預購 100 組再生產' },
+    { name: '訂閱回購', price: 'HK$38–98 / 月', platform: 'Shopify Subscription',
+      day: '入門產品轉成每月自動配送，9 折。先推 3 個月組合包。',
+      copy: '自動配送。隨時取消。',
+      gate: '100 位活躍訂閱者' },
+    { name: '進階組合包', price: 'HK$198–498', platform: 'Shopify',
+      day: '入門 + 回購 + 一個配件。組合包 75 折。限定現有客戶升級。',
+      copy: '整套系統。給已經在用的人。',
+      gate: '30% 現有客戶升級' },
+    { name: '年度限定', price: 'HK$288–888', platform: 'Shopify',
+      day: '一年一次。500 件限定。一個新產品 + 一個編號盒。名單先知道。不投放廣告。',
+      copy: '一年一次。500 件。名單先。',
+      gate: '48 小時內售罄' }
+  ],
+  IP型: [
+    { name: '貼圖 / 桌布包', price: 'HK$8–28', platform: 'Gumroad 或 Shopify',
+      day: '從你的內容挑一個反覆出現的角色或符號。做 6–10 張貼圖或 4K 桌布，數位下載售 HK$18。',
+      copy: '那個角色，貼在你的筆電上。',
+      gate: '售出 100 組' },
+    { name: 'Plush / 吊飾', price: 'HK$25–88', platform: 'Shopify 或 Fourthwall',
+      day: '挑被問最多的那個角色。打樣 plush（最少 50 件）。預購驗證後再生產。',
+      copy: '預購。6 週出貨。',
+      gate: '預購 50 組再生產' },
+    { name: '限量 Drop', price: 'HK$48–188', platform: 'Shopify',
+      day: '3 件組合（plush + 吊飾 + 貼圖），編號限定。開賣 72 小時。名單先。',
+      copy: '72 小時。然後就沒了。',
+      gate: '時間內售罄' },
+    { name: '家族 / 世界觀組合', price: 'HK$198–488', platform: 'Shopify',
+      day: '全家角色打包。限 100 組。編號。附簽名卡。',
+      copy: '整個宇宙。100 組。',
+      gate: '售罄且等待名單 50+ 再加開' },
+    { name: '授權 / 聯名', price: '5–15% 分潤', platform: '直接接觸品牌',
+      day: '主動找 3 個調性合的品牌。提案 co-brand 膠囊。保留創作主導權，拿 10% 分潤。',
+      copy: '我們一起做。你保留你的角色。',
+      gate: '簽下一個合作案，條件不拘' }
+  ],
+  社群型: [
+    { name: '會員電子報', price: 'HK$8–28 / 月', platform: 'Substack 或 Patreon',
+      day: '每週一封固定格式的 email（連結、幕後、Q&A）。HK$8 / 月。前 100 位免費當種子。',
+      copy: '每週一封信。我沒發在任何地方的事。',
+      gate: '150 位付費訂閱者' },
+    { name: '私密 Podcast / BTS', price: 'HK$38–58 / 月', platform: 'Patreon 或 Spotify',
+      day: '每週錄一支 15 分鐘。只給會員。講你正在想、正在做、正在卡關的事。',
+      copy: '我腦子裡正在轉的事。',
+      gate: '連續 3 個月 200 位活躍訂閱者' },
+    { name: '每月會員直播', price: '含在會員裡', platform: 'Zoom 或 IG Live',
+      day: '每月一次，60 分鐘。會員預先丟問題，你現場回答。所有付費等級都能參加。',
+      copy: '每月第一個週五。會員限定。',
+      gate: '40%+ 會員出席' },
+    { name: '頂級會籍（1 對 1）', price: 'HK$298–688 / 月', platform: 'Patreon 或 Fourthwall',
+      day: '最頂級。30 位額滿。每月 30 分鐘 1 對 1。',
+      copy: '30 個位。每月 30 分鐘。',
+      gate: '額滿 + 候補名單' },
+    { name: '共學 / Retreat', price: 'HK$888–2,500', platform: 'Eventbrite + Zoom 或實體',
+      day: '一年一次。線上 3 天或實體 2 天。限 30 人。workshop + 社交 + 你本人。',
+      copy: '三天。30 個人。一個地方。',
+      gate: '完售且 4.8 星以上' }
+  ]
+};
+
+const BENCHMARKS = {
+  人格型: [
+    {name:'Moriah Elizabeth', mech:'人格 + IP', img:'https://bookingagentinfo.com/wp-content/uploads/2020/12/Moriah-Elizabeth.jpg', score:0.92},
+    {name:'Ryan Trahan', mech:'人格 + 娛樂', img:'https://storage.googleapis.com/gweb-uniblog-publish-prod/original_images/Ryan-Trahan-Prof_4.jpeg', score:0.85},
+    {name:'Salish Matter', mech:'人格 + Routine', img:'https://static.time.com/v3/assets/bltea6093859af6183b/bltee0496a70570dffa/6a5029a1a234190a0cd479fd/TIME100-Creators-2026-Salish-Matter.jpg?auto=webp&branch=production&crop=4%3A5%2Coffset-x0.00%2Coffset-y0.00&quality=75&width=1080', score:0.81}
+  ],
+  生活方式型: [
+    {name:'Emma Chamberlain', mech:'生活 + 消耗品', img:'https://cdn2.sagefinder.com/assets/users/large/2130031.jpg?r=862028', score:0.95},
+    {name:'Pamela Reif', mech:'生活 + 健身', img:'https://static.instyle.de/0x0%3A1257x943/2000x1500/images/2024-06/pamela-reif-interview-haarpflege1.jpg', score:0.88},
+    {name:'滴妹', mech:'生活 + FMCG', img:'https://v3-statics.mirrormedia.mg/images/c9350e8a-d218-43ac-92ed-86624bbd1126.jpg', score:0.84}
+  ],
+  專業教學型: [
+    {name:'Ali Abdaal', mech:'專業 + 數位階梯', img:'https://proassetspdlcom.cdnstatics2.com/usuaris/autores/fotos/86/original/000085366_1_AliAbdaal-nocreditneeded_202407111615.png', score:0.94},
+    {name:'Coffee Lam', mech:'專業 + 自有品牌', img:'https://cdn.hk01.com/di/media/images/dw/20210527/474726576903557120715468.jpeg/oY1BMzOqSvw85m_1mF_oEwUn9KtyqBgShOVjFYTlYxU?v=w1920', score:0.86},
+    {name:'愛莉莎莎', mech:'專業 + 高價課', img:'https://v3-statics.mirrormedia.mg/images/9f16ef7a-09f3-45fb-9252-2eb1805c6a04-w800.jpg', score:0.82}
+  ],
+  審美編輯型: [
+    {name:'Matilda Djerf', mech:'審美 + 服飾', img:'https://images.aftonbladet-cdn.se/v2/images/513dc158-f93c-4553-8ac7-4451cad66478?fit=crop&format=auto&h=2266&q=50&s=e8963ddfda57c0ef4837ddae57764b237f534ad0&w=1900', score:0.91},
+    {name:'Molly-Mae Hague', mech:'審美 + Drop', img:'https://cdn.mos.cms.futurecdn.net/YYsXdafP8BEFvQsFxQF3pk.jpg', score:0.85},
+    {name:'Grace Beverley', mech:'審美 + 多品牌', img:'https://i.insider.com/63bd464423f3620019879262?format=jpeg&width=1200', score:0.83}
+  ],
+  信任推薦型: [
+    {name:'黎貝卡', mech:'信任 + 編輯', img:'https://img.i-scmp.com/cdn-cgi/image/fit%3Dcontain%2Cwidth%3D425%2Cformat%3Dauto/sites/default/files/styles/768x768/public/d8/images/canvas/2021/02/24/9a3d9909-c725-4ca5-b6ef-7c5e0a47a81d_7ea4615b.jpg?itok=8ENKq7QJ&v=1614137480', score:0.89},
+    {name:'NikkieTutorials', mech:'信任 + 美妝', img:'https://imgix.bustle.com/uploads/getty/2019/12/31/57d08bcd-9faf-456d-bf35-c90c09c4daeb-getty-930210216.jpg?crop=faces&fit=crop&fm=jpg&h=1200&w=1200', score:0.84}
+  ],
+  IP型: [
+    {name:'Moriah Elizabeth', mech:'IP + 收藏', img:'https://bookingagentinfo.com/wp-content/uploads/2020/12/Moriah-Elizabeth.jpg', score:0.94},
+    {name:'李子柒', mech:'IP + 文化世界觀', img:'https://upload.wikimedia.org/wikipedia/commons/8/86/%E6%9D%8E%E5%AD%90%E6%9F%92_2017.jpg', score:0.88}
+  ],
+  社群型: [
+    {name:'滇西小哥', mech:'社群 + 會員', img:'https://cdn-ak.f.st-hatena.com/images/fotolife/h/hidari_te/20191225/20191225224440.jpg', score:0.87},
+    {name:'李子柒', mech:'社群 + IP 世界觀', img:'https://upload.wikimedia.org/wikipedia/commons/8/86/%E6%9D%8E%E5%AD%90%E6%9F%92_2017.jpg', score:0.82}
+  ]
+};
+
+const QUESTIONS = [
+  {id:1, phase:'定位', type:'single', evidence:'C',
+   q:'你的內容主軸是什麼？',
+   sub:'選一個觀眾會第一個說出來的。',
+   opts:['生活 / 日常','美妝 / 護膚','穿搭 / 造型','教學 / 技能','娛樂 / IP','健身 / 健康']},
+  {id:2, phase:'定位', type:'single', evidence:'C',
+   q:'如果粉絲只能用一句話形容你，最接近的是？',
+   sub:'選最像的，不是最好聽的。',
+   opts:['我喜歡這個人','我想變得像他／她','我想跟他／她學','我喜歡他的作品或角色','我相信他的推薦','我想加入他的社群']},
+  {id:3, phase:'受眾', type:'number', evidence:'C',
+   q:'目前真正看得到你的受眾有多大？',
+   sub:'最主要的平台，現在的數字。',
+   fields:[{lab:'Instagram 追蹤數', ph:'例 120000'},{lab:'TikTok / 抖音', ph:'例 80000'}]},
+  {id:4, phase:'受眾', type:'single', evidence:'C',
+   q:'你的觀眾主要在哪？',
+   sub:'大部分，多數時候。',
+   opts:['香港','台灣','中國大陸','東南亞','美 / 英 / 歐','全球混合']},
+  {id:5, phase:'證據', type:'single', evidence:'A',
+   q:'你手上最強的證據是？',
+   sub:'誠實回答。診斷會根據這個調整所有其他答案的權重。',
+   opts:[{l:'已經有人付費給我（產品、票、課程、訂閱）', e:'A'},
+         {l:'粉絲一直問我某個具體東西', e:'B'},
+         {l:'某個主題的內容特別多人存／分享／傳訊息', e:'C'},
+         {l:'老實說——我只是覺得我可以做好', e:'D'}]},
+  {id:6, phase:'粉絲深度', type:'multi', evidence:'B',
+   q:'過去 6 個月，哪些粉絲行為真的發生過？',
+   sub:'只算真的發生過的。',
+   opts:[{l:'大量 DM', e:'B'},{l:'固定留言的老面孔', e:'B'},{l:'粉絲帳號 / 粉絲創作', e:'B'},{l:'記得我的生日', e:'B'},{l:'問過能不能見面', e:'B'},{l:'問過合照 / 簽名', e:'B'},{l:'模仿我的穿搭 / 日常', e:'B'},{l:'買我推薦的東西', e:'B'},{l:'反覆問同一個 how-to 問題', e:'B'}]},
+  {id:7, phase:'粉絲深度', type:'multi', evidence:'B',
+   q:'粉絲明確要求過什麼？',
+   sub:'這是你手上最強的需求訊號。',
+   opts:[{l:'寫真 / 照片組', e:'B'},{l:'小卡 / 收藏品', e:'B'},{l:'會員 / 訂閱', e:'B'},{l:'課程 / 教學', e:'B'},{l:'Preset / 模板', e:'B'},{l:'旅遊 / 餐廳指南', e:'B'},{l:'見面會 / 活動', e:'B'},{l:'跟我用的同款產品', e:'B'}]},
+  {id:8, phase:'底線', type:'multi', evidence:'D',
+   q:'完全不會做的事？',
+   sub:'這些會從你的產品建議裡完全排除。',
+   opts:[{l:'寫真 / 照片組', e:'D'},{l:'訂閱者專屬私人內容', e:'D'},{l:'客製影片 / 語音', e:'D'},{l:'開直播', e:'D'},{l:'見面會', e:'D'},{l:'簽名照 / 拍立得', e:'D'},{l:'教學', e:'D'},{l:'自有品牌', e:'D'}]}
+];
+
+const BRANCH_QUESTIONS = {
+  '生活 / 日常': {id:'L1', phase:'生活型', type:'single', evidence:'C',
+    q:'你的內容裡最常出現的每日儀式是？',
+    sub:'觀眾反覆看到你做的那一件事。',
+    opts:[{l:'晨間咖啡 / 茶 / 早餐', e:'C'},{l:'護膚 / 上妝流程', e:'C'},{l:'穿搭 / 出門準備', e:'C'},{l:'運動 / 健身習慣', e:'C'},{l:'煮飯 / 備餐', e:'C'},{l:'旅行 / 城市散步', e:'C'}]},
+  '美妝 / 護膚': {id:'B1', phase:'美妝型', type:'single', evidence:'C',
+    q:'你的美妝內容在講 routine，還是 result？',
+    sub:'這決定你的第一個產品是消耗品還是一次性購買。',
+    opts:[{l:'Routine——同一組產品反覆使用', e:'C'},{l:'Result——妝容 / 對比 / 變化', e:'C'},{l:'兩種都有，看當期主題', e:'C'}]},
+  '穿搭 / 造型': {id:'F1', phase:'穿搭型', type:'single', evidence:'C',
+    q:'粉絲問「這哪裡買」多，還是問「怎麼搭」多？',
+    sub:'兩種問題對應不同類型的產品。',
+    opts:[{l:'大多是「哪裡買」——單品導購', e:'C'},{l:'大多是「怎麼搭」——造型服務', e:'C'},{l:'兩種都有', e:'C'}]},
+  '教學 / 技能': {id:'E1', phase:'教學型', type:'multi', evidence:'A',
+    q:'你真的能教、不是只會聊的具體技能？',
+    sub:'30 分鐘一對一能帶人走完的事。',
+    opts:[{l:'攝影 / 錄影', e:'C'},{l:'剪輯 / 後製', e:'C'},{l:'生產力 / 工作系統', e:'C'},{l:'料理 / 食物製作', e:'C'},{l:'健身規劃', e:'C'},{l:'職涯 / 創作者經營', e:'C'},{l:'設計 / 創作工具', e:'C'},{l:'語言 / 寫作', e:'C'}]},
+  '娛樂 / IP': {id:'I1', phase:'IP 型', type:'single', evidence:'C',
+    q:'你有反覆出現的角色、世界觀或符號嗎？',
+    sub:'觀眾不提示也能說出來的那種。',
+    opts:[{l:'有——角色 / 吉祥物 / 命名系列', e:'C'},{l:'有——反覆出現的視覺或口頭符號', e:'C'},{l:'沒有——每支影片獨立', e:'C'}]},
+  '健身 / 健康': {id:'FW1', phase:'健身型', type:'single', evidence:'C',
+    q:'你的健身內容偏方法，還是偏轉變？',
+    sub:'方法建立可重複課表；轉變建立旗艦產品。',
+    opts:[{l:'方法——同一套系統', e:'C'},{l:'轉變——前後對比故事', e:'C'},{l:'兩者都有', e:'C'}]}
+};
+
+const FINAL_QUESTIONS = [
+  {id:14, phase:'資源', type:'single', evidence:'D',
+    q:'前 90 天可以投入的預算？',
+    sub:'誠實填。會影響哪些產品適合當第一個。',
+    opts:[{l:'HK$0–2K', e:'D'},{l:'HK$2K–10K', e:'D'},{l:'HK$10K–50K', e:'D'},{l:'HK$50K+', e:'D'}]},
+  {id:15, phase:'資源', type:'single', evidence:'D',
+    q:'每週可以投入的時數？',
+    sub:'實際，不是理想。',
+    opts:[{l:'2 小時以下', e:'D'},{l:'2–5', e:'D'},{l:'5–10', e:'D'},{l:'10–20', e:'D'},{l:'全職', e:'D'}]}
+];
+
+const followMap = {1:'人格型', 2:'生活方式型', 3:'專業教學型', 4:'IP型', 5:'信任推薦型', 6:'社群型'};
+
+let flow = [];
+let answers = {};
+let qStep = 0;
+let diag = document.getElementById('diag');
+let body = document.getElementById('diagBody');
+
+function openDiag() {
+  flow = [...QUESTIONS];
+  diag.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  qStep = 0;
+  renderQ();
+}
+
+function ensureBranch() {
+  const pillar = answers[1];
+  if (!pillar || !BRANCH_QUESTIONS[pillar]) return;
+  if (flow.find(q => q.id === BRANCH_QUESTIONS[pillar].id)) return;
+  flow.splice(8, 0, BRANCH_QUESTIONS[pillar]);
+}
+
+function renderQ() {
+  const q = flow[qStep];
+  document.getElementById('diagLabel').textContent = q.phase;
+  document.getElementById('diagProg').textContent = `第 ${qStep + 1} / ${flow.length} 題`;
+  let html = '';
+  if (q.evidence === 'A') html += `<div class="diag-evidence"><b>最高權重</b>這題被視為實際行為。你的答案會大幅主導診斷結果。</div>`;
+  else if (q.evidence === 'D') html += `<div class="diag-evidence"><b>最低權重</b>這是偏好，不是行為。會影響產出，但無法推翻前面的證據。</div>`;
+  html += `<h2 class="diag-q">${q.q}</h2><div class="diag-sub">${q.sub}</div>`;
+
+  if (q.type === 'number') {
+    html += `<div class="diag-opts" style="grid-template-columns:1fr 1fr">${q.fields.map(f => `<input class="diag-opt" style="cursor:text;font-family:var(--mono);font-size:13px;letter-spacing:.04em;color:var(--ink)" placeholder="${f.ph}" data-field="${f.lab}">`).join('')}</div>`;
+  } else if (q.type === 'single') {
+    const cls = q.opts.length > 5 ? 'c2' : '';
+    html += `<div class="diag-opts ${cls}">${q.opts.map(o => {
+      const obj = typeof o === 'object' ? o : {l:o, e:'C'};
+      const sel = answers[q.id] === obj.l;
+      return `<button class="diag-opt ${sel?'sel':''}" onclick="pick(this,'${obj.l.replace(/'/g,"\\'")}')">${obj.l}</button>`;
+    }).join('')}</div>`;
+  } else if (q.type === 'multi') {
+    const cls = q.opts.length > 5 ? 'c2' : '';
+    html += `<div class="diag-opts ${cls}">${q.opts.map(o => {
+      const obj = typeof o === 'object' ? o : {l:o, e:'C'};
+      const sel = (answers[q.id] || []).includes(obj.l);
+      return `<button class="diag-opt ${sel?'sel':''}" onclick="pickMulti(this,'${obj.l.replace(/'/g,"\\'")}')"><span class="check">${sel?'✓':' '}</span>${obj.l}</button>`;
+    }).join('')}</div>`;
+  }
+
+  html += `<div class="diag-foot"><div class="l"><button onclick="qBack()" ${qStep===0?'disabled style="opacity:.3"':''}>← 上一題</button><button class="skip" onclick="qSkip()">略過</button></div><div class="r"><button class="primary" onclick="qNext()" id="diagNext">${qStep === flow.length - 1 ? '看診斷結果 →' : '繼續 →'}</button></div></div>`;
+  body.innerHTML = html;
+
+  if (q.type === 'number') {
+    q.fields.forEach(f => {
+      const inp = body.querySelector(`[data-field="${f.lab}"]`);
+      inp.addEventListener('input', e => {
+        answers[q.id] = {...(answers[q.id] || {}), [f.lab]: e.target.value};
+      });
+    });
+  }
+}
+
+function pick(btn, val) {
+  answers[flow[qStep].id] = val;
+  body.querySelectorAll('.diag-opt').forEach(b => b.classList.remove('sel'));
+  btn.classList.add('sel');
+  setTimeout(advance, 220);
+}
+
+function pickMulti(btn, val) {
+  const q = flow[qStep];
+  const cur = answers[q.id] || [];
+  if (cur.includes(val)) {
+    answers[q.id] = cur.filter(x => x !== val);
+    btn.classList.remove('sel');
+    btn.querySelector('.check').textContent = ' ';
+  } else {
+    answers[q.id] = [...cur, val];
+    btn.classList.add('sel');
+    btn.querySelector('.check').textContent = '✓';
+  }
+}
+
+function qBack() { if (qStep > 0) { qStep--; renderQ(); } else closeDiag(); }
+function qSkip() { advance(); }
+function qNext() { advance(); }
+function advance() {
+  if (qStep === 0) ensureBranch();
+  if (qStep === 8 && !flow.find(q => q.id === 14)) flow.push(...FINAL_QUESTIONS);
+  qStep++;
+  if (qStep >= flow.length) showResult();
+  else renderQ();
+}
+function closeDiag() {
+  diag.classList.remove('open');
+  document.body.style.overflow = '';
+  answers = {};
+  qStep = 0;
+}
+
+function calcEngine() {
+  let scores = {'人格型':0, '生活方式型':0, '專業教學型':0, '審美編輯型':0, '信任推薦型':0, 'IP型':0, '社群型':0};
+  let totals = {'人格型':0, '生活方式型':0, '專業教學型':0, '審美編輯型':0, '信任推薦型':0, 'IP型':0, '社群型':0};
+  function add(e, p, ev) { scores[e] += p * EVIDENCE[ev]; totals[e] += EVIDENCE[ev]; }
+
+  const pillar = answers[1];
+  const follow = answers[2];
+  const strong = answers[5];
+  const fb = answers[6] || [];
+  const fr = answers[7] || [];
+  const branch = answers['L1'] || answers['B1'] || answers['F1'] || answers['E1'] || answers['I1'] || answers['FW1'] || [];
+
+  if (pillar === '生活 / 日常') add('生活方式型', 30, 'C');
+  if (pillar === '美妝 / 護膚') add('審美編輯型', 25, 'C');
+  if (pillar === '穿搭 / 造型') add('審美編輯型', 30, 'C');
+  if (pillar === '教學 / 技能') add('專業教學型', 35, 'C');
+  if (pillar === '娛樂 / IP') add('IP型', 30, 'C');
+  if (pillar === '健身 / 健康') add('生活方式型', 22, 'C');
+
+  if (follow === '我喜歡這個人') add('人格型', 28, 'C');
+  if (follow === '我想變得像他／她') add('審美編輯型', 25, 'C');
+  if (follow === '我想跟他／她學') add('專業教學型', 28, 'C');
+  if (follow === '我喜歡他的作品或角色') add('IP型', 28, 'C');
+  if (follow === '我相信他的推薦') add('信任推薦型', 28, 'C');
+  if (follow === '我想加入他的社群') add('社群型', 28, 'C');
+
+  if (strong && strong.includes('已經有人付費')) {
+    if (follow === '我喜歡這個人') add('人格型', 25, 'A');
+    if (follow === '我想變得像他／她') add('審美編輯型', 25, 'A');
+    if (follow === '我想跟他／她學') add('專業教學型', 25, 'A');
+    if (follow === '我喜歡他的作品或角色') add('IP型', 25, 'A');
+    if (follow === '我相信他的推薦') add('信任推薦型', 25, 'A');
+    if (follow === '我想加入他的社群') add('社群型', 25, 'A');
+  }
+
+  fb.forEach(b => {
+    if (/DM|留言|生日|見面|合照|簽名|模仿|推薦|how-to/.test(b)) {
+      if (follow === '我喜歡這個人') add('人格型', 8, 'B');
+      if (follow === '我想變得像他／她') add('審美編輯型', 6, 'B');
+      if (follow === '我想跟他／她學') add('專業教學型', 7, 'B');
+      if (follow === '我相信他的推薦') add('信任推薦型', 8, 'B');
+      if (follow === '我想加入他的社群') add('社群型', 7, 'B');
+    }
+  });
+
+  fr.forEach(r => {
+    if (/寫真|會員|見面|合照|簽名/.test(r)) add('人格型', 7, 'B');
+    if (/小卡|收藏|merch/.test(r)) add('IP型', 6, 'B');
+    if (/課程|教學|preset|模板|指南/.test(r)) add('專業教學型', 8, 'B');
+    if (/旅遊|餐廳|推薦/.test(r)) add('信任推薦型', 7, 'B');
+    if (/會員|直播|社群/.test(r)) add('社群型', 6, 'B');
+  });
+
+  if (Array.isArray(branch)) {
+    branch.forEach(b => {
+      if (typeof b === 'string' && /攝影|錄影|剪輯|生產力|料理|健身|職涯|設計|語言/.test(b)) add('專業教學型', 6, 'C');
+    });
+  }
+
+  const normalized = {};
+  Object.keys(scores).forEach(k => {
+    normalized[k] = Math.min(100, Math.round((scores[k] / ((totals[k] || 1) * 30)) * 100));
+  });
+  const sorted = Object.entries(normalized).sort((a,b) => b[1] - a[1]);
+  return {scores: normalized, primary: sorted[0][0], secondary: sorted[1][0], sorted};
+}
+
+function showResult() {
+  const r = calcEngine();
+  const products = PRODUCTS[r.primary];
+  const benchmarks = (BENCHMARKS[r.primary] || BENCHMARKS['生活方式型']).slice(0, 3);
+
+  const top = r.sorted[0];
+  const conf = top[1] >= 70 ? '高' : top[1] >= 50 ? '中高' : top[1] >= 35 ? '中' : '低';
+  const confDetail = top[1] >= 50 ? '多種證據類型指向同一方向' : top[1] >= 35 ? '有一種強證據，其他較薄' : '多為偏好，證據不足';
+
+  const strong = answers[5] || '';
+  const fb = answers[6] || [];
+  const fr = answers[7] || [];
+  const donts = answers[8] || [];
+
+  let whyParts = [];
+  whyParts.push(`你的內容主軸是 <strong>${answers[1] || '未明確'}</strong>（C 權重）。`);
+  if (strong) whyParts.push(`最強證據：<strong>${strong.split('（')[0]}</strong>——${strong.includes('已經有人') ? 'A 權重' : strong.includes('一直問') ? 'B 權重需求訊號' : strong.includes('特別多人') ? 'C 權重內容訊號' : 'D 權重，僅為偏好'}。`);
+  if (fb.length > 0) whyParts.push(`確認了 <strong>${fb.length}</strong> 個粉絲行為訊號（B 權重）。`);
+  if (fr.length > 0) whyParts.push(`<strong>${fr.length}</strong> 個明確粉絲需求（B 權重）。`);
+
+  body.innerHTML = `
+    <div class="result">
+      <h3>你的診斷結果</h3>
+      <div class="sub">${r.primary} · 次要：${r.secondary}</div>
+
+      <div class="evidence-block">
+        <div class="lab">主要引擎 · ${conf} 信心度</div>
+        <h4>${r.primary}變現</h4>
+        <div class="conf">分數 ${top[1]} / 100 · 依據：${confDetail}</div>
+        <p class="why">${whyParts.join(' ')}</p>
+      </div>
+
+      <h6 style="font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin:24px 0 12px">你的產品階梯</h6>
+      <div class="product-list">
+        ${products.map((p, i) => `
+          <div class="product">
+            <div class="n">${String(i+1).padStart(2,'0')}</div>
+            <div>
+              <div class="name">${p.name}</div>
+              <div class="meta"><b>${p.price}</b> · ${p.platform}</div>
+              <div class="day"><b>${i===0?'Day 1 動作':'下一步'}</b>${p.day}</div>
+              <div class="copy">「${p.copy}」</div>
+              <div class="gate"><b>晉升條件</b>進入第 ${i+2} 步：${p.gate}</div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="dont-list">
+        <h6>現在不要做</h6>
+        <ul>${donts.slice(0, 4).map(d => `<li>${d}——你已標為底線</li>`).join('')}
+        ${donts.length === 0 ? '<li>你沒有硬性排除，但任何超過第 1 步的產品都要等第 1 步達到晉升條件再做</li>' : ''}
+        <li>FMCG、實體零售、自有美妝品牌——至少等到 10 萬以上追蹤 + 12 個月回購數據再做</li></ul>
+      </div>
+
+      <div class="benchmarks">
+        <h6>真實創作者對標</h6>
+        ${benchmarks.map(b => `
+          <div class="bm-row">
+            <img src="${b.img}" alt="${b.name}">
+            <div>
+              <div class="name">${b.name}</div>
+              <div class="mech">${b.mech}</div>
+            </div>
+            <div class="pct">${Math.round(b.score * top[1])}%</div>
+          </div>
+        `).join('')}
+      </div>
+
+      <div style="margin-top:24px;padding-top:18px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">
+        <div style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)">完成 · ${flow.length} / ${flow.length} 題</div>
+        <button onclick="closeDiag()" style="font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;background:transparent;border:1px solid var(--ink);padding:10px 18px;cursor:pointer">關閉</button>
+      </div>
+    </div>
+  `;
+}
+</script>
+
+</body>
+</html>
