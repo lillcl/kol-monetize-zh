@@ -58,7 +58,7 @@ a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
 .more-cases h3{font-family:var(--display);font-size:32px;line-height:1.1;letter-spacing:-.02em;font-weight:500;margin:0 auto 32px;max-width:1080px;padding:0 32px;max-width:24ch}
 .more-cases h3 em{font-style:italic;color:var(--red);font-weight:400}
 .mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1080px;margin:0 auto;padding:0 32px}
-.mini{border:1px solid var(--ink);background:var(--paper);padding:0;display:flex;flex-direction:column;transition:transform .2s}
+.mini{border:1px solid var(--ink);background:var(--paper);padding:0;display:flex;flex-direction:column;transition:transform .2s;cursor:pointer}
 .mini:hover{transform:translateY(-2px)}
 .mini .pic{aspect-ratio:4/3;overflow:hidden;background:#222;position:relative}
 .mini .pic img{width:100%;height:100%;object-fit:cover;filter:grayscale(.12) contrast(1.05)}
@@ -153,6 +153,35 @@ footer{padding:24px 32px;border-top:1px solid var(--rule);display:flex;justify-c
 .bm-row .mech{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
 .bm-row .pct{margin-left:auto;font-family:var(--display);font-size:24px;font-weight:500;color:var(--red)}
 
+.case-modal{position:fixed;inset:0;background:rgba(14,15,17,.92);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:24px;z-index:110}
+.case-modal.open{display:flex}
+.case-modal-shell{background:var(--paper);max-width:760px;width:100%;max-height:92vh;overflow-y:auto;position:relative}
+.case-modal-head{position:sticky;top:0;background:var(--paper);padding:18px 28px;border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;z-index:2}
+.case-modal-head .label{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--red)}
+.case-modal-head .close{background:transparent;border:0;font-size:22px;cursor:pointer;color:var(--ink);line-height:1;padding:4px 8px}
+.case-modal-body{padding:28px}
+.case-modal-hero{display:grid;grid-template-columns:180px 1fr;gap:20px;margin-bottom:24px}
+.case-modal-hero img{width:180px;height:240px;object-fit:cover;background:#222;filter:grayscale(.12) contrast(1.05)}
+.case-modal-hero h2{font-family:var(--display);font-size:34px;line-height:1.05;letter-spacing:-.03em;margin:0 0 4px;font-weight:500}
+.case-modal-hero .role{font-style:italic;color:var(--muted);font-size:16px;margin-bottom:14px}
+.case-modal-hero .mech{font-family:var(--mono);font-size:11px;color:var(--red);letter-spacing:.1em;text-transform:uppercase;padding:6px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-top:10px}
+.case-modal-body h5{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);margin:24px 0 8px;font-weight:500}
+.case-modal-body h5:first-of-type{margin-top:0}
+.case-modal-body p{font-size:17px;line-height:1.6;margin:0 0 14px}
+.case-modal-body .quote{border-left:2px solid var(--red);padding-left:18px;font-style:italic;color:var(--muted);margin:18px 0;font-size:17px;line-height:1.55}
+.case-modal-body table{width:100%;border-collapse:collapse;margin:14px 0;font-family:var(--mono);font-size:13px}
+.case-modal-body table th,.case-modal-body table td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--rule)}
+.case-modal-body table th{font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-size:10px}
+.case-modal-body table td:first-child{color:var(--ink);font-family:var(--body);font-size:15px}
+.case-modal-body table td.price{text-align:right;color:var(--red);font-weight:500}
+.case-modal-body ul{margin:0 0 14px;padding:0;list-style:none}
+.case-modal-body ul li{padding-left:20px;position:relative;font-size:16px;line-height:1.6;margin-bottom:6px}
+.case-modal-body ul li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:500}
+.case-modal-body .dont li::before{content:"×";color:var(--red)}
+.case-modal-body .dont{background:rgba(210,69,58,.04);padding:14px 14px 14px 30px;border-left:3px solid var(--red);margin:14px 0}
+.case-modal-body .sources{margin-top:20px;padding-top:16px;border-top:1px solid var(--rule);font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em}
+.case-modal-body .sources a{color:var(--ink);border-bottom:1px solid var(--rule);margin-right:14px}
+
 @media(max-width:900px){
   .case-grid{grid-template-columns:1fr;gap:24px;padding:0 24px}
   .case-body h2{font-size:32px}
@@ -174,6 +203,10 @@ footer{padding:24px 32px;border-top:1px solid var(--rule);display:flex;justify-c
   .diag-shell{max-height:100vh;height:100vh}
   .diag-q{font-size:24px}
   .diag-body{padding:24px}
+  .case-modal-shell{max-height:100vh;height:100vh}
+  .case-modal-hero{grid-template-columns:1fr}
+  .case-modal-hero img{width:100%;height:200px}
+  .case-modal-hero h2{font-size:26px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -244,7 +277,7 @@ footer{padding:24px 32px;border-top:1px solid var(--rule);display:flex;justify-c
   <h3>五位創作者，<em>五種機制。</em></h3>
   <div class="mini-grid">
 
-    <div class="mini">
+    <div class="mini" onclick="openCaseModal('grace')">
       <div class="pic">
         <img src="https://i.insider.com/63bd464423f3620019879262?format=jpeg&width=1200" alt="Grace Beverley">
         <span class="region">UK · Mega</span>
@@ -258,7 +291,7 @@ footer{padding:24px 32px;border-top:1px solid var(--rule);display:flex;justify-c
       </div>
     </div>
 
-    <div class="mini">
+    <div class="mini" onclick="openCaseModal('moriah')">
       <div class="pic">
         <img src="https://bookingagentinfo.com/wp-content/uploads/2020/12/Moriah-Elizabeth.jpg" alt="Moriah Elizabeth">
         <span class="region">US · Mega</span>
@@ -272,7 +305,7 @@ footer{padding:24px 32px;border-top:1px solid var(--rule);display:flex;justify-c
       </div>
     </div>
 
-    <div class="mini">
+    <div class="mini" onclick="openCaseModal('coffee')">
       <div class="pic">
         <img src="https://cdn.hk01.com/di/media/images/dw/20210527/474726576903557120715468.jpeg/oY1BMzOqSvw85m_1mF_oEwUn9KtyqBgShOVjFYTlYxU?v=w1920" alt="Coffee Lam 林芊妤">
         <span class="region">HK · Large</span>
@@ -286,7 +319,7 @@ footer{padding:24px 32px;border-top:1px solid var(--rule);display:flex;justify-c
       </div>
     </div>
 
-    <div class="mini">
+    <div class="mini" onclick="openCaseModal('ali')">
       <div class="pic">
         <img src="https://proassetspdlcom.cdnstatics2.com/usuaris/autores/fotos/86/original/000085366_1_AliAbdaal-nocreditneeded_202407111615.png" alt="Ali Abdaal">
         <span class="region">UK · Mega</span>
@@ -300,7 +333,7 @@ footer{padding:24px 32px;border-top:1px solid var(--rule);display:flex;justify-c
       </div>
     </div>
 
-    <div class="mini">
+    <div class="mini" onclick="openCaseModal('dimei')">
       <div class="pic">
         <img src="https://v3-statics.mirrormedia.mg/images/c9350e8a-d218-43ac-92ed-86624bbd1126.jpg" alt="滴妹">
         <span class="region">TW · Large</span>
@@ -354,6 +387,16 @@ footer{padding:24px 32px;border-top:1px solid var(--rule);display:flex;justify-c
       <button class="close" onclick="closeDiag()">×</button>
     </div>
     <div class="diag-body" id="diagBody"></div>
+  </div>
+</div>
+
+<div class="case-modal" id="caseModal">
+  <div class="case-modal-shell">
+    <div class="case-modal-head">
+      <div class="label" id="caseModalLabel">個案</div>
+      <button class="close" onclick="closeCaseModal()">×</button>
+    </div>
+    <div class="case-modal-body" id="caseModalBody"></div>
   </div>
 </div>
 
@@ -630,6 +673,92 @@ const FINAL_QUESTIONS = [
 
 const followMap = {1:'人格型', 2:'生活方式型', 3:'專業教學型', 4:'IP型', 5:'信任推薦型', 6:'社群型'};
 
+const CASE_DETAILS = {
+  grace: {
+    name:'Grace Beverley', region:'UK · Mega', brand:'TALA + Productivity Method',
+    img:'https://i.insider.com/63bd464423f3620019879262?format=jpeg&width=1200',
+    mech:'專業教學 + 創辦人美學 → 數位階梯 + 自有服飾',
+    why:'兩條平行追蹤原因：較成熟的受眾來學生產力與創業知識；較年輕的受眾把她本人當作穿搭與生活風格指標。後者驅動 TALA，前者端為 KOL 數位生意。',
+    sell:'兩條產品線、同一群觀眾。高毛利的數位階梯（免費內容 → planner → 課程 → flagship），以及把她本人穿搭商品化的 TALA 服飾線。',
+    flow:['免費專業內容：生產力 / 健身 / 創業','數位產品：planner / 模板','創辦人精選：IG 穿搭 → TALA SKU','旗艦教育：Productivity Method','品牌延伸：TALA + 健身 / 生活'],
+    products:[
+      {n:'Productivity Method course',p:'—',r:'旗艦教育'},
+      {n:'TALA 創辦人系列',p:'—',r:'服飾選品'},
+      {n:'日常 planner',p:'—',r:'入門數位'}
+    ],
+    copy:['你的內容本身就是店面','先用數位 / planner 驗證專業力','再把創辦人審美商品化'],
+    dont:'同時建立多個重資產品牌。Grace 撐得住，你多半撐不住——選階梯或選服飾線。',
+    sources:[['TALA Founder Feed','https://www.wearetala.com/en-us/pages/shop-grace-instagram'],['Productivity Method','https://productivitymethod.com/']]
+  },
+  moriah: {
+    name:'Moriah Elizabeth', region:'US · Mega', brand:'Moriah Elizabeth Merch',
+    img:'https://bookingagentinfo.com/wp-content/uploads/2020/12/Moriah-Elizabeth.jpg',
+    mech:'反覆出現的角色 → 收藏品生態系',
+    why:'The Pickles。一群有名字、有聲音、有關係、有情節的角色，在她的內容裡演了多年。觀眾追蹤的是一個<em>持續的世界觀</em>，不是一個人。',
+    sell:'實體收藏品，五個價格帶——吊飾、迷你 plush、全尺寸 plush、雙人組、全家族包。同一個 IP，五個 SKU，每支影片都看得到。',
+    flow:['內容：角色反覆出現','核心 SKU：plush $29.99','入門收藏：吊飾 $14.99','迷你：迷你 plush 雙人組 $24.99','組合包：Pickle 家族 $76.47','稀缺：限時 SKU'],
+    products:[
+      {n:'吊飾',p:'$15',r:'入門'},
+      {n:'迷你 plush',p:'$25',r:'進階'},
+      {n:'Plush',p:'$30',r:'核心'},
+      {n:'迷你雙人組',p:'$25',r:'組合'},
+      {n:'Pickle 家族包',p:'$76',r:'完整'}
+    ],
+    copy:['先創造一個觀眾會記住的反覆出現角色','同一個 IP 做不同價位','組合包 + 限量 Drop'],
+    dont:'沒有反覆出現的 IP 就不要做 plush。一般 merchandise 賣不動。',
+    sources:[['官方 Merch','https://moriahelizabethmerch.com/']]
+  },
+  coffee: {
+    name:'Coffee Lam 林芊妤', region:'HK · Large', brand:'CoffeeSweat',
+    img:'https://cdn.hk01.com/di/media/images/dw/20210527/474726576903557120715468.jpeg/oY1BMzOqSvw85m_1mF_oEwUn9KtyqBgShOVjFYTlYxU?v=w1920',
+    mech:'專業力 + 痛點 → 自有品牌',
+    why:'多年瑜伽教學內容。追蹤建立在<em>對她方法與專業力的信任</em>上——不是生活窺探。',
+    sell:'為她的觀眾具體身形問題（小胸、瑜伽內衣難買）設計的運動服飾。產品源頭是留言區反覆出現的痛點。',
+    flow:['瑜伽專業：多年教學','免費影片：YouTube workouts','痛點：找不到合適的瑜伽內衣','自有品牌：bra / leggings / 服飾','客單：運費 + 禮品門檻'],
+    products:[
+      {n:'瑜伽內衣',p:'—',r:'核心'},
+      {n:'瑜伽褲',p:'—',r:'核心'},
+      {n:'運動上衣',p:'—',r:'延伸'}
+    ],
+    copy:['產品源頭必須是真實痛點','內容就是產品 demo','用客單門檻拉高 AOV'],
+    dont:'沒有專業力就不要先開服飾品牌。',
+    sources:[['CoffeeSweat About','https://coffeesweat.com/zh-cn/pages/about-us'],['Shop All','https://coffeesweat.com/collections/all-products']]
+  },
+  ali: {
+    name:'Ali Abdaal', region:'UK · Mega', brand:'Ali Abdaal Products',
+    img:'https://proassetspdlcom.cdnstatics2.com/usuaris/autores/fotos/86/original/000085366_1_AliAbdaal-nocreditneeded_202407111615.png',
+    mech:'免費教育 → 數位階梯 → 高價旗艦',
+    why:'生產力、YouTube 製作、創作者經濟。追蹤是<em>純工具性</em>——觀眾來學，不是來陪。',
+    sell:'一個精心設計的數位階梯：免費 YouTube → 27 美元縮圖包 → 56 美元組合包 → 149 美元短課 → 995 美元旗艦計畫。每一步教觀眾下一步存在。',
+    flow:['免費 YouTube：生產力 / 創作者教育','低價：YouTube OS $27','組合包：OS + Thumbnail Pack $56','短課：Camera Confidence $149','旗艦：PTYA $995 / Creatorpreneur $799','訂閱：LifeOS 月費'],
+    products:[
+      {n:'YouTube OS',p:'$27',r:'入門'},
+      {n:'OS + Thumbnail 組合包',p:'$56',r:'組合'},
+      {n:'Camera Confidence',p:'$149',r:'中價'},
+      {n:'PTYA',p:'$995',r:'旗艦'},
+      {n:'Creatorpreneur',p:'$799',r:'旗艦'}
+    ],
+    copy:['一個內容支柱對應一個產品','低價先驗證','再往高價 upsell'],
+    dont:'沒有權威性就不要從 $800+ 的課程開始。',
+    sources:[['Ali Shop','https://aliabdaal.com/shop/'],['Products','https://shop.aliabdaal.com/collections/all']]
+  },
+  dimei: {
+    name:'滴妹', region:'TW · Large', brand:'NAP TEA · 再睡5分鐘',
+    img:'https://v3-statics.mirrormedia.mg/images/c9350e8a-d218-43ac-92ed-86624bbd1126.jpg',
+    mech:'人格 → 高頻回購 FMCG',
+    why:'人格。她的聲音、她的慵懶、她打造的舒服品牌世界。追蹤是 parasocial、生活風格相關。',
+    sell:'茶飲。可在便利商店買到的高頻回購消費品。品牌調性（慵懶、溫柔、療癒）是差異化；產品類別（茶飲）是符合人格的消耗品。',
+    flow:['免費人格內容：YouTube / 社群','粉絲親近感：角色 / 生活','自有 FMCG：茶飲','實體通路：超商','回購：每週 / 習慣性消費'],
+    products:[
+      {n:'NAP TEA 茶飲系列',p:'—',r:'核心'},
+      {n:'門市限定款',p:'—',r:'獨家'}
+    ],
+    copy:['高頻比一次 merchandise 更重要','把粉絲關係放入消耗品','線下店也是粉絲接觸點'],
+    dont:'F&B 供應鏈 / 門市需要資本，不要低估。',
+    sources:[['NAP TEA','https://www.napteazzz.com/']]
+  }
+};
+
 let flow = [];
 let answers = {};
 let qStep = 0;
@@ -872,6 +1001,63 @@ function showResult() {
     </div>
   `;
 }
+function openCaseModal(id) {
+  const c = CASE_DETAILS[id];
+  if (!c) return;
+  document.getElementById('caseModalLabel').textContent = '個案研究 · ' + c.region;
+  document.getElementById('caseModalBody').innerHTML = `
+    <div class="case-modal-hero">
+      <img src="${c.img}" alt="${c.name}">
+      <div>
+        <h2>${c.name}</h2>
+        <div class="role">${c.brand}</div>
+        <div class="mech">${c.mech}</div>
+      </div>
+    </div>
+
+    <h5>為什麼追蹤</h5>
+    <p>${c.why}</p>
+
+    <h5>實際在賣什麼</h5>
+    <p>${c.sell}</p>
+
+    <h5>變現路徑</h5>
+    <div style="margin:14px 0">
+      ${c.flow.map((f,i) => `<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--rule);font-size:15px"><span style="font-family:var(--mono);color:var(--red);font-weight:500;flex:none;min-width:24px">${String(i+1).padStart(2,'0')}</span><span>${f}</span></div>`).join('')}
+    </div>
+
+    <h5>真實產品與價格</h5>
+    <table>
+      <thead><tr><th>產品</th><th>價格</th><th>角色</th></tr></thead>
+      <tbody>
+        ${c.products.map(p => `<tr><td>${p.n}</td><td class="price">${p.p}</td><td>${p.r}</td></tr>`).join('')}
+      </tbody>
+    </table>
+
+    <h5>值得抄的部分</h5>
+    <ul>${c.copy.map(x => `<li>${x}</li>`).join('')}</ul>
+
+    <h5>不要照抄的部分</h5>
+    <ul class="dont"><li>${c.dont}</li></ul>
+
+    <div class="sources">
+      <b style="color:var(--ink);font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-right:12px">第一方資料</b>
+      ${c.sources.map(s => `<a href="${s[1]}" target="_blank" rel="noopener">${s[0]} ↗</a>`).join('')}
+    </div>
+  `;
+  document.getElementById('caseModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCaseModal() {
+  document.getElementById('caseModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('caseModal').addEventListener('click', (e) => {
+  if (e.target.id === 'caseModal') closeCaseModal();
+});
+
 </script>
 
 </body>
