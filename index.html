@@ -106,8 +106,16 @@ a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
 .case .photo img{width:100%;height:100%;object-fit:cover;filter:saturate(.9) contrast(1.03);transition:transform .4s ease}
 .case:hover .photo img{transform:scale(1.04)}
 .case .photo .mech-tag{position:absolute;left:0;bottom:0;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:6px 10px}
+.case .photo .followers{position:absolute;top:10px;right:10px;background:rgba(14,15,17,.84);color:#fff;font-family:var(--mono);font-size:10px;letter-spacing:.1em;padding:5px 8px}
 .case .in{padding:16px;display:flex;flex-direction:column;flex:1}
 .case h3{font-family:var(--display);font-size:21px;margin:0 0 12px;font-weight:500;letter-spacing:-.02em;line-height:1.15}
+.case .figures{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:12px}
+.case .figures div{background:#fff;padding:9px 10px}
+.case .figures .k{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;display:block;margin-bottom:3px}
+.case .figures .v{font-family:var(--display);font-size:19px;font-weight:500;letter-spacing:-.02em;line-height:1.05;display:block;color:var(--ink)}
+.case .figures .v.money{color:var(--green)}
+.case .figures .v.na{color:var(--red)}
+.case .figures .src{position:absolute;opacity:0;pointer-events:none}
 .case .prices{display:flex;gap:18px;font-family:var(--mono);font-size:11px;color:var(--muted);padding-bottom:12px;border-bottom:1px solid var(--rule);margin-bottom:12px;flex-wrap:wrap}
 .case .prices b{display:block;color:var(--red);font-size:17px;font-weight:500;letter-spacing:-.01em}
 .case p{font-size:15px;line-height:1.55;margin:0 0 14px;flex:1}
@@ -455,14 +463,15 @@ function toHKD(s){
 function toHKDMoney(s){
   if(!s)return s; if(s.includes('HK$'))return zhTail(s);
   if(!/[€£¥]|\$/.test(s))return s;
-  const m=s.match(/[€£¥]|NT\$|\$[\s]*([\d][\d,]*(?:\.\d+)?)\s*([MBK])\b(.*)$/i);
+  const m=s.match(/(?:[€£¥]|NT\$|\$)\s*([\d][\d,]*(?:\.\d+)?)\s*(million|billion|[MBK])\b(.*)$/i);
   if(!m)return toHKD(s);
   const r=FX[curOf(s)];
   const n=parseFloat(m[1].replace(/,/g,''));
-  const unit=m[2].toUpperCase();
+  const unit=(m[2]||'').toLowerCase().startsWith('b')?'B':(m[2]||'').toUpperCase()==='M'||/^million/i.test(m[2]||'')?'M':'K';
   const tail=zhTail(m[3]||'').replace(/^\s*\+\s*/,'+').replace(/\s*\+\s*$/,'+');
   const v=n*(unit==='B'?1000:unit==='M'?1:0.001)*r;
-  const out=v>=1000?'HK$'+(v/100).toFixed(1)+'億':'HK$'+Math.round(v).toLocaleString('en-US')+'萬';
+  // v 的單位是「百萬 HKD」：>=100 用億（v/100），否則用萬（v*100）
+  const out=v>=100?'HK$'+(v/100).toFixed(1)+'億':'HK$'+Math.round(v*100).toLocaleString('en-US')+'萬';
   return out+tail;
 }
 function hash(s){let h=0;for(let i=0;i<s.length;i++)h=((h<<5)-h+s.charCodeAt(i))|0;return Math.abs(h);}
@@ -476,7 +485,9 @@ const PHOTO={
 };
 
 const CASES=[
-{id:'emma',name:'Emma Chamberlain',mech:'生活儀式 → 消耗品',photo:'img/emma.jpg',
+{id:'emma',followers:'23M IG',aud:'23M IG\n12M YouTube',revenue:'$20M+',networth:null,
+revNote:'Chamberlain Coffee 年營收（媒體報導，2023 年完成 $7M Series A）',
+rows:[['Instagram 粉絲','23M','平台顯示 · 2026'],['YouTube 訂閱','12M','Wikipedia · 2025-12'],['品牌年營收','US$20M+','媒體報導 · Chamberlain Coffee'],['品牌估值','未公開','—'],['個人淨資產','未公開','—']],name:'Emma Chamberlain',mech:'生活儀式 → 消耗品',photo:'img/emma.jpg',
 prices:[['抹茶','$30'],['咖啡','$20'],['入門包','$44-72'],['組合包','$80-99']],
 desc:'她賣的不是咖啡，是「你也能有她那個早晨」的入場券。',
 h:'實體消耗品是最大宗收入來源。點進看完整拆解。',
@@ -485,7 +496,9 @@ items:[['Matcha','$30'],['Cold Brew Coffee','$20'],['Cold Brew Starter Pack','$4
 copy:['內容裡反覆出現的習慣，就是你的產品類別','Starter pack 降低第一次購買的門檻','消耗品的回購週期比單次 merch 更有價值'],
 dont:'不要一開始就開咖啡品牌。Emma 的供應鏈花了多年與資金——先用數位產品或預購驗證需求。',
 srcs:[['官網','https://chamberlaincoffee.com'],['Starter Pack','https://chamberlaincoffee.com/products/chamberlain-coffee-cold-brew-coffee-starter-pack']]},
-{id:'grace',name:'Grace Beverley',mech:'專業教學 + 創辦人審美',photo:'img/grace.jpg',
+{id:'grace',followers:'1M IG',aud:'1M IG\n2.2M 合計',revenue:'£6.2M',networth:null,
+revNote:'TALA 首年營業額（Wikipedia 引述公司數據）',
+rows:[['Instagram 粉絲','1M','平台顯示 · 2021'],['全平台合計','2.2M','Cosmopolitan 訪談 · 2026-03'],['TALA 首年營業額','£6.2M','Wikipedia · 2019-20'],['TALA 融資','£4.2M / $5.7M','2021-12 / 2022-02'],['TALA 2023 銷售','8 位數字','同比 +100%'],['個人淨資產','未公開','—']],name:'Grace Beverley',mech:'專業教學 + 創辦人審美',photo:'img/grace.jpg',
 prices:[['Production Method','—'],['TALA 服飾','—'],['planner','—']],
 desc:'兩條產品線、同一群觀眾：教生產力的數位課程，加她本人穿搭的 TALA。',
 h:'教學內容應該有階梯——永遠不要從頂端開始賣。',
@@ -494,7 +507,9 @@ items:[['Productivity Method','—'],['TALA Founder 精選','—'],['數位 plan
 copy:['內容本身就是店面','先用數位 / planner 驗證專業力','再把創辦人審美商品化'],
 dont:'不要同時建立多個重資產品牌。Grace 撐得住，你多半撐不住——選階梯或選服飾線。',
 srcs:[['TALA Founder Feed','https://www.wearetala.com/en-us/pages/shop-grace-instagram'],['Productivity Method','https://productivitymethod.com/']]},
-{id:'moriah',name:'Moriah Elizabeth',mech:'IP → 收藏品生態系',photo:'img/moriah.jpg',
+{id:'moriah',followers:'10.4M',aud:'10.4M IG',revenue:'$5M+',networth:null,
+revNote:'個人 Shopify 周邊年營收（創作者公開表示）',
+rows:[['Instagram 粉絲','10.4M','平台顯示 · 2026'],['周邊年營收','US$5M+','創作者公開表示'],['Pickle Plush 銷售','約 US$2M','5K-15K 件 × $30-40 · 估算'],['個人淨資產','未公開','—']],name:'Moriah Elizabeth',mech:'IP → 收藏品生態系',photo:'img/moriah.jpg',
 prices:[['吊飾','$15'],['迷你','$25'],['Plush','$30'],['家族包','$76']],
 desc:'同一個 IP，五個價格帶。角色本身就是護城河。',
 h:'先讓觀眾記住一個 IP，再把它做成不同價位的商品。',
@@ -503,7 +518,9 @@ items:[['吊飾 Keychain','$14.99'],['Mini Plush Duo','$24.99'],['Plush','$29.99
 copy:['先創造觀眾會記住的反覆出現角色','同一個 IP 做不同價位','組合包 + 限量 Drop'],
 dont:'沒有反覆出現的 IP 就不要做 plush。一般 merchandise 是創作者電商的墳場。',
 srcs:[['官方 Merch','https://moriahelizabethmerch.com/']]},
-{id:'coffee',name:'Coffee Lam 林芊妤',mech:'專業力 + 痛點 → 自有品牌',photo:'img/coffee.jpg',
+{id:'coffee',followers:'1M IG',aud:'1M IG',revenue:null,networth:null,
+revNote:'CoffeeSweat 未公開營收',
+rows:[['Instagram 粉絲','1M','平台顯示'],['Facebook 粉絲','36,682','平台顯示'],['品牌營收','未公開','—'],['個人淨資產','未公開','—']],name:'Coffee Lam 林芊妤',mech:'專業力 + 痛點 → 自有品牌',photo:'img/coffee.jpg',
 prices:[['CoffeeSweat','—'],['瑜珈內衣','—'],['瑜珈褲','—']],
 desc:'留言區吵了三年的一件事：小胸女生買不到合適的瑜珈內衣。',
 h:'去翻你的留言區，找出觀眾吵最久的問題。',
@@ -512,7 +529,9 @@ items:[['瑜珈內衣','—'],['瑜珈褲','—'],['運動上衣','—']],
 copy:['產品源頭必須是真實痛點','內容就是產品 demo','用客單門檻拉高 AOV'],
 dont:'沒有專業力就不要先開服飾品牌。製造、庫存、退貨——都很重。',
 srcs:[['About','https://coffeesweat.com/zh-cn/pages/about-us'],['Shop','https://coffeesweat.com/collections/all-products']]},
-{id:'ali',name:'Ali Abdaal',mech:'數位階梯 $27 → $995',photo:'img/ali.png',
+{id:'ali',followers:'6M',aud:'6M YouTube',revenue:'$5M+',networth:null,
+revNote:'課程業務年營收（PTYA $995 + Creatorpreneur $799 等）',
+rows:[['YouTube 訂閱','6M','平台顯示 · 2026'],['課程年營收','US$5M+','創作者公開 · 2024'],['cohort 版首 9 個月','US$1.5M+','創作者公開'],['旗艦課售價','US$995','PTYA 自助版'],['個人淨資產','未公開','—']],name:'Ali Abdaal',mech:'數位階梯 $27 → $995',photo:'img/ali.png',
 prices:[['YouTube OS','$27'],['組合包','$56'],['短課','$149'],['PTYA','$995']],
 desc:'每一步教觀眾下一步存在。低價數位是研究，不是營收。',
 h:'一個內容支柱對應一個產品，然後層層往上。',
@@ -521,7 +540,9 @@ items:[['YouTube OS','$27'],['OS + Thumbnail 組合','$56'],['Camera Confidence'
 copy:['一個內容支柱對應一個產品','低價先驗證，再 upsell 課程','旗艦定價由觀眾已付過的錢決定'],
 dont:'沒有權威性就不要從 $800+ 的課程開始。',
 srcs:[['Shop','https://aliabdaal.com/shop/'],['Products','https://shop.aliabdaal.com/collections/all']]},
-{id:'dimei',name:'滴妹',mech:'人格 + 調性 → 高頻回購',photo:'img/dimei.jpg',
+{id:'dimei',followers:'—',aud:'未公開',revenue:'NT$180M',networth:null,
+revNote:'NAP TEA 2023 年營收（鏡週刊原報導，經 CTWant 確認）',
+rows:[['NAP TEA 2023 營收','NT$1.8億','鏡週刊 · 2024-10 報導'],['公司淨資產','NT$1.9億','公開公司登記 · 估算'],['實體門市','15 家','2020-05 起 4 年'],['個人粉絲數','未公開','—'],['個人淨資產','未公開','—']],name:'滴妹',mech:'人格 + 調性 → 高頻回購',photo:'img/dimei.jpg',
 prices:[['NAP TEA','—'],['再睡5分鐘','—'],['門市限定','—']],
 desc:'喝茶的時候會想到她。這就是為什麼每週回購。',
 h:'品牌調性強 → 找調性對應的消耗品。',
@@ -536,10 +557,16 @@ document.getElementById('caseGrid').innerHTML=CASES.map(c=>`
 <article class="case" onclick="openCase('${c.id}')">
   <div class="photo">
     <img src="${c.photo}" alt="${c.name}" loading="lazy">
+    <span class="followers">${c.followers||''}</span>
     <span class="mech-tag">${c.mech}</span>
   </div>
   <div class="in">
     <h3>${c.name}</h3>
+    ${c.figs?`<div class="figures">
+      <div><span class="k">年收入</span><span class="v money" title="${c.revNote||''}">${toHKDMoney(c.revenue)}</span></div>
+      <div><span class="k">淨資產</span><span class="v na" title="${c.nwNote||''}">${c.networth?toHKDMoney(c.networth):'未公開'}</span></div>
+      <div><span class="k">粉絲 / 訂閱</span><span class="v">${c.aud||'—'}</span></div>
+    </div>`:''}
     <div class="prices">${c.prices.map(p=>`<div><b>${toHKD(p[1])}</b>${p[0]}</div>`).join('')}</div>
     <p>${c.desc}</p>
     <div class="go">看完整拆解 →</div>
@@ -558,6 +585,9 @@ function openCase(id){
         <div class="mech">真實案例拆解</div>
       </div>
     </div>
+    <h5>數據來源</h5>
+    <table><thead><tr><th>項目</th><th style="text-align:right">數值</th><th>性質 / 出處</th></tr></thead>
+    <tbody>${(c.rows||[]).map(r=>`<tr><td>${r[0]}</td><td class="p">${r[1]}</td><td style="font-size:12px;color:var(--muted)">${r[2]}</td></tr>`).join('')}</tbody></table>
     <h5>核心洞察</h5>
     <p>${c.h}</p>
     <div class="quote">${c.quote}</div>

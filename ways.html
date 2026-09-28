@@ -166,14 +166,15 @@ function toHKD(s){
 function toHKDMoney(s){
   if(!s||s.includes('HK$'))return zhTail(s);
   if(!/[€£¥]|\$/.test(s))return s;
-  const m=s.match(/[€£¥]|NT\$|\$[\s]*([\d][\d,]*(?:\.\d+)?)\s*([MBK])\b(.*)$/i);
+  const m=s.match(/(?:[€£¥]|NT\$|\$)\s*([\d][\d,]*(?:\.\d+)?)\s*(million|billion|[MBK])\b(.*)$/i);
   if(!m)return toHKD(s);
   const r=FX[curOf(s)];
   const n=parseFloat(m[1].replace(/,/g,''));
-  const unit=m[2].toUpperCase();
+  const unit=(m[2]||'').toLowerCase().startsWith('b')?'B':(m[2]||'').toUpperCase()==='M'||/^million/i.test(m[2]||'')?'M':'K';
   const tail=zhTail(m[3]||'').replace(/^\s*\+\s*/,'+').replace(/\s*\+\s*$/,'+');
   const v=n*(unit==='B'?1000:unit==='M'?1:0.001)*r;
-  const out=v>=1000?'HK$'+(v/100).toFixed(1)+'億':'HK$'+Math.round(v).toLocaleString('en-US')+'萬';
+  // v 的單位是「百萬 HKD」：>=100 用億（v/100），否則用萬（v*100）
+  const out=v>=100?'HK$'+(v/100).toFixed(1)+'億':'HK$'+Math.round(v*100).toLocaleString('en-US')+'萬';
   return out+(tail?tail:'');
 }
 
