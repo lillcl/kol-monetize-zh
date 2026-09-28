@@ -118,11 +118,64 @@ footer{padding:20px 28px;border-top:1px solid var(--rule);display:flex;justify-c
 
 <footer>
   <div>Monetize. Vol. 01 · 所有變現方式</div>
-  <div>2026 年 9 月</div>
+  <div>價格已換算港幣 · USD 7.84 / EUR 8.93 / GBP 10.38 / JPY 0.0498 / TWD 0.247（2026-09-28）· 滑鼠停留可看原價</div>
 </footer>
 
 <script>
 const PALETTE = ['#D2453A','#3A5A40','#1F4E5F','#7A4A2E','#5C3A6E','#A0522D','#2E5A3A','#6B2737','#1A3A5A','#7C5A2A','#3A3A6E','#5A2A4A'];
+
+/* 匯率：1 USD = HK$7.84（2026-09-28 參考匯率） */
+const FX={USD:7.84,EUR:8.93,GBP:10.38,JPY:0.0498,TWD:0.247};
+
+function curOf(s){
+  if(/€/.test(s))return 'EUR';
+  if(/£/.test(s))return 'GBP';
+  if(/¥/.test(s))return 'JPY';
+  if(/NT\$/.test(s))return 'TWD';
+  return 'USD';
+}
+/* 期間單位中文化 */
+function zhTail(t){
+  return t.replace(/\s*\/\s*mo\b/gi,'/月').replace(/\s*\/\s*yr\b/gi,'/年')
+          .replace(/\blifetime\b/gi,'累計').replace(/\bsince joining\b/gi,'累積')
+          .replace(/\bsub\b/gi,'訂閱').replace(/\bnet\b/gi,'淨收入').replace(/\bpass\b/gi,'通行證')
+          .replace(/\bor\b/g,'或')
+          .replace(/\s{2,}/g,' ')
+          .replace(/\s*([+/])\s*/g,'$1')
+          .replace(/(或)(\S)/g,'$1 $2')
+          .replace(/\s*([+/年/月])\s*(?=或|$)/g,'$1')
+          .trim();
+}
+function fmt(n){
+  if(n>=1000)return Math.round(n).toLocaleString('en-US');
+  if(n>=10)return String(Math.round(n));
+  return n.toFixed(1).replace(/\.0$/,'');
+}
+/* 價格：$5–$25/mo → HK$39–196/月 */
+function toHKD(s){
+  if(!s||s.includes('HK$'))return zhTail(s);
+  const r=FX[curOf(s)];
+  let first=true;
+  return zhTail(s.replace(/€|£|¥|NT\$|\$/g,'')
+    .replace(/[\d][\d,]*(?:\.\d+)?/g,m=>{
+      const v=parseFloat(m.replace(/,/g,''))*r;
+      return (first?(first=false,'HK$'):'')+fmt(v);
+    }));
+}
+/* 金額：$250M → HK$19.6億 · $1.4B → HK$109.8億 · $5M+/yr → HK$3,920萬+/年 */
+function toHKDMoney(s){
+  if(!s||s.includes('HK$'))return zhTail(s);
+  if(!/[€£¥]|\$/.test(s))return s;
+  const m=s.match(/[€£¥]|NT\$|\$[\s]*([\d][\d,]*(?:\.\d+)?)\s*([MBK])\b(.*)$/i);
+  if(!m)return toHKD(s);
+  const r=FX[curOf(s)];
+  const n=parseFloat(m[1].replace(/,/g,''));
+  const unit=m[2].toUpperCase();
+  const tail=zhTail(m[3]||'').replace(/^\s*\+\s*/,'+').replace(/\s*\+\s*$/,'+');
+  const v=n*(unit==='B'?1000:unit==='M'?1:0.001)*r;
+  const out=v>=1000?'HK$'+(v/100).toFixed(1)+'億':'HK$'+Math.round(v).toLocaleString('en-US')+'萬';
+  return out+(tail?tail:'');
+}
 
 function initials(name) {
   return name.split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0]).join('').toUpperCase();
@@ -230,8 +283,8 @@ function render() {
         <p class="product">${item.description}</p>
         <div class="meta">
           <div><span>產品</span><b>${item.product_name}</b></div>
-          <div><span>價格</span><b>${item.price}</b></div>
-          <div><span>營收</span><b class="${revClass}">${rev.amount}</b></div>
+          <div><span>價格</span><b title="原價 ${item.price}">${toHKD(item.price)}</b></div>
+          <div><span>營收</span><b class="${revClass}" title="原值 ${rev.amount}${rev.type==='estimated'?' · 估算':''}">${toHKDMoney(rev.amount)}</b></div>
           <div><span>平台</span><b style="font-size:11px">${item.platform}</b></div>
         </div>
         <a class="src" href="${item.url}" target="_blank" rel="noopener">看商品頁 →</a>

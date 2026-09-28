@@ -429,6 +429,42 @@ renderMock();
 
 /* ── CASES ── */
 const PALETTE=['#D2453A','#3A5A40','#1F4E5F','#7A4A2E','#5C3A6E','#A0522D','#2E5A3A','#6B2737','#1A3A5A'];
+
+/* 匯率：1 USD = HK$7.84（2026-09-28 參考匯率） */
+const FX={USD:7.84,EUR:8.93,GBP:10.38,JPY:0.0498,TWD:0.247};
+function curOf(s){return /€/.test(s)?'EUR':/£/.test(s)?'GBP':/¥/.test(s)?'JPY':/NT\$/.test(s)?'TWD':'USD';}
+function zhTail(t){
+  return t.replace(/\s*\/\s*mo\b/gi,'/月').replace(/\s*\/\s*yr\b/gi,'/年')
+    .replace(/\blifetime\b/gi,'累計').replace(/\bsince joining\b/gi,'累積')
+    .replace(/\bsub\b/gi,'訂閱').replace(/\bnet\b/gi,'淨收入')
+    .replace(/\sor\b/g,'或').replace(/\s{2,}/g,' ')
+    .replace(/\s*([+/])\s*/g,'$1')
+    .replace(/(或)(\S)/g,'$1 $2')
+    .replace(/\s*([+/年/月])\s*(?=或|$)/g,'$1').trim();
+}
+function fmt(n){return n>=1000?Math.round(n).toLocaleString('en-US'):n>=10?String(Math.round(n)):n.toFixed(1).replace(/\.0$/,'');}
+function toHKD(s){
+  if(!s)return s; if(s.includes('HK$'))return zhTail(s);
+  const r=FX[curOf(s)]; let first=true;
+  return zhTail(s.replace(/€|£|¥|NT\$|\$/g,'')
+    .replace(/[\d][\d,]*(?:\.\d+)?/g,m=>{
+      const v=parseFloat(m.replace(/,/g,''))*r;
+      return (first?(first=false,'HK$'):'')+fmt(v);
+    }));
+}
+function toHKDMoney(s){
+  if(!s)return s; if(s.includes('HK$'))return zhTail(s);
+  if(!/[€£¥]|\$/.test(s))return s;
+  const m=s.match(/[€£¥]|NT\$|\$[\s]*([\d][\d,]*(?:\.\d+)?)\s*([MBK])\b(.*)$/i);
+  if(!m)return toHKD(s);
+  const r=FX[curOf(s)];
+  const n=parseFloat(m[1].replace(/,/g,''));
+  const unit=m[2].toUpperCase();
+  const tail=zhTail(m[3]||'').replace(/^\s*\+\s*/,'+').replace(/\s*\+\s*$/,'+');
+  const v=n*(unit==='B'?1000:unit==='M'?1:0.001)*r;
+  const out=v>=1000?'HK$'+(v/100).toFixed(1)+'億':'HK$'+Math.round(v).toLocaleString('en-US')+'萬';
+  return out+tail;
+}
 function hash(s){let h=0;for(let i=0;i<s.length;i++)h=((h<<5)-h+s.charCodeAt(i))|0;return Math.abs(h);}
 function ini(n){return n.split(/\s+/).filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase();}
 
@@ -504,7 +540,7 @@ document.getElementById('caseGrid').innerHTML=CASES.map(c=>`
   </div>
   <div class="in">
     <h3>${c.name}</h3>
-    <div class="prices">${c.prices.map(p=>`<div><b>${p[1]}</b>${p[0]}</div>`).join('')}</div>
+    <div class="prices">${c.prices.map(p=>`<div><b>${toHKD(p[1])}</b>${p[0]}</div>`).join('')}</div>
     <p>${c.desc}</p>
     <div class="go">看完整拆解 →</div>
   </div>
@@ -527,7 +563,7 @@ function openCase(id){
     <div class="quote">${c.quote}</div>
     <h5>真實產品與價格</h5>
     <table><thead><tr><th>產品</th><th style="text-align:right">價格</th></tr></thead>
-    <tbody>${c.items.map(i=>`<tr><td>${i[0]}</td><td class="p">${i[1]}</td></tr>`).join('')}</tbody></table>
+    <tbody>${c.items.map(i=>`<tr><td>${i[0]}</td><td class="p">${toHKD(i[1])}</td></tr>`).join('')}</tbody></table>
     <h5>值得抄的部分</h5>
     <ul>${c.copy.map(x=>`<li>${x}</li>`).join('')}</ul>
     <h5>不要照抄的部分</h5>
@@ -558,8 +594,8 @@ document.getElementById('peekGrid').innerHTML=PEEK.map(p=>{
     </div>
     <div class="bd">
       <div class="nm">${p.who}</div>
-      <div class="pr">${p.price}</div>
-      <div class="rv">${p.what}<b>${p.rev}</b>${p.note}</div>
+      <div class="pr">${toHKD(p.price)}</div>
+      <div class="rv">${p.what}<b>${toHKDMoney(p.rev)}</b>${p.note}</div>
     </div>
   </a>`;
 }).join('');
