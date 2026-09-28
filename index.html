@@ -114,6 +114,20 @@ a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
 .case .go{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--ink);padding:9px;text-align:center;transition:background .14s,color .14s}
 .case:hover .go{background:var(--ink);color:var(--paper)}
 
+/* peek grid */
+.peek{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.pk{background:#fff;border:1px solid var(--ink);display:flex;flex-direction:column;transition:transform .16s}
+.pk:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(16,24,40,.08)}
+.pk .ph{aspect-ratio:1;overflow:hidden;position:relative;background:var(--ink);flex:none}
+.pk .ph img{width:100%;height:100%;object-fit:cover;object-position:center 22%;filter:saturate(.92) contrast(1.03)}
+.pk .ph .fb{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:28px;font-weight:500;color:rgba(255,255,255,.92)}
+.pk .ph .cat{position:absolute;top:8px;left:8px;background:rgba(14,15,17,.84);color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:4px 7px}
+.pk .bd{padding:13px;display:flex;flex-direction:column;flex:1}
+.pk .nm{font-family:var(--display);font-size:16px;font-weight:500;line-height:1.2;margin-bottom:3px;letter-spacing:-.01em}
+.pk .pr{font-family:var(--mono);font-size:15px;color:var(--red);font-weight:500;margin-bottom:8px}
+.pk .rv{font-family:var(--mono);font-size:10px;color:var(--muted);line-height:1.5;margin-top:auto;padding-top:9px;border-top:1px solid var(--rule)}
+.pk .rv b{display:block;color:var(--green);font-size:12px;font-weight:500}
+
 /* taxonomy */
 .tax{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink);border-left:1px solid var(--ink)}
 .tax-c{padding:20px 18px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink)}
@@ -239,6 +253,7 @@ footer{padding:22px 28px;display:flex;justify-content:space-between;gap:16px;fon
   .hero{grid-template-columns:1fr;gap:44px;padding:56px 24px 64px}
   .hero .sub{max-width:52ch}
   .cases{grid-template-columns:1fr 1fr}
+  .peek{grid-template-columns:1fr 1fr 1fr}
   .tax{grid-template-columns:1fr 1fr}
   .path{grid-template-columns:1fr 1fr}
   .path .st{border-bottom:1px solid var(--ink)}
@@ -254,19 +269,21 @@ footer{padding:22px 28px;display:flex;justify-content:space-between;gap:16px;fon
   .sec{padding:56px 20px}
   .proof{grid-template-columns:1fr}
   .cases{grid-template-columns:1fr}
+  .peek{grid-template-columns:1fr 1fr}
   .tax{grid-template-columns:1fr}
   .path{grid-template-columns:1fr}
   .path .st{border-right:0}
   .path .st:last-child{border-bottom:0}
   .final{padding:64px 20px}
   .modal-hero{grid-template-columns:1fr}
-  .modal-hero .av{width:100%;height:100px}
+  .modal-hero .av{width:100%;height:220px}
   .modal-hero h2{font-size:26px}
   .diag-shell{max-height:100vh;height:100vh}
   .diag-body,.res{padding:20px}
   .diag-body h2{font-size:23px}
   .diag-opts.two,.diag-inputs{grid-template-columns:1fr}
 }
+@media(max-width:460px){.peek{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 @media print{.bar,.final,.diag,.modal{display:none!important}}
 </style>
@@ -276,8 +293,8 @@ footer{padding:22px 28px;display:flex;justify-content:space-between;gap:16px;fon
 <div class="bar">
   <b>Monetize</b>
   <nav>
-    <a href="#cases">真實案例</a>
-    <a href="ways.html">59 種變現方式</a>
+    <a href="#cases">人物例子</a>
+    <a href="#ways">59 種變現方式</a>
     <a href="#start" style="color:var(--red)">開始診斷</a>
   </nav>
 </div>
@@ -324,47 +341,35 @@ footer{padding:22px 28px;display:flex;justify-content:space-between;gap:16px;fon
 </div>
 
 <!-- ══ PATHWAY ══ -->
-<section class="sec">
+<!-- ══ SECTION 2 · 人物例子 ══ -->
+<section class="sec" id="cases">
   <div class="sec-inner">
-    <div class="sec-kicker">變現路徑 · 五個階段</div>
-    <h2>每個成功的創作者，都走過<em>同樣五步</em>。</h2>
-    <p class="lede">差別只在起點和速度。從 HK$48 的數位產品開始，到上限最高的體驗經濟——每一階段都有明確的晉升條件。</p>
-    <div class="path">
-      <div class="st"><div class="n">Step 01</div><h4>驗證需求</h4><p>HK$48–98<br>數位產品</p></div>
-      <div class="st"><div class="n">Step 02</div><h4>第一次成交</h4><p>HK$128–298<br>工具包 / 組合</p></div>
-      <div class="st"><div class="n">Step 03</div><h4>穩定回購</h4><p>HK$38–98 / 月<br>會員 / 訂閱</p></div>
-      <div class="st"><div class="n">Step 04</div><h4>高價產品</h4><p>HK$688–1,500<br>課程 / 1 對 1</p></div>
-      <div class="st"><div class="n">Step 05</div><h4>體驗經濟</h4><p>HK$888–2,500<br>見面會 / 工作坊</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ CASES ══ -->
-<section class="sec" id="cases" style="background:var(--paper-deep)">
-  <div class="sec-inner">
-    <div class="sec-kicker">真實案例 · 真實價格</div>
-    <h2>六位創作者，<em>六種生意。</em></h2>
-    <p class="lede">每一個都可以點進去看完整的拆解：賣什麼、怎麼賣、什麼能抄、什麼不能抄。</p>
+    <div class="sec-kicker">人物例子 · 六位真實創作者</div>
+    <h2>他們已經<em>這樣賺到錢了。</em></h2>
+    <p class="lede">點進任何一個，看完整拆解：賣什麼、怎麼賣、什麼能抄、什麼不能抄。</p>
     <div class="cases" id="caseGrid"></div>
   </div>
 </section>
 
-<!-- ══ TAXONOMY ══ -->
-<section class="sec">
+<!-- ══ SECTION 3 · 59 種變現方式 ══ -->
+<section class="sec" id="ways" style="background:var(--paper-deep)">
   <div class="sec-inner">
-    <div class="sec-kicker">框架 · 七種變現機制</div>
-    <h2>你的內容裡，<em>已經有</em>其中一種。</h2>
-    <p class="lede">不是選你喜歡的，是選觀眾已經在買單的那一種。診斷會算出來。</p>
-    <div class="tax" id="taxGrid"></div>
+    <div class="sec-kicker">變現方式 · 59 個真實案例</div>
+    <h2>從 3 美元的飲料<em>到 995 美元的課程。</em></h2>
+    <p class="lede">我們拆了 59 個真實案例——每個都有真實商品頁、真實定價、真實營收。這裡先看 8 個。</p>
+    <div class="peek" id="peekGrid"></div>
+    <div style="margin-top:28px;display:flex;justify-content:center">
+      <a class="btn-primary" href="ways.html" style="text-decoration:none">看全部 59 種變現方式 →</a>
+    </div>
   </div>
 </section>
 
 <!-- ══ FINAL ══ -->
 <section class="final">
-  <h2>五分鐘後，<em>你就知道</em>第一個產品該賣什麼。</h2>
-  <p>不用註冊、不用留 email、不用給真名。13 題結束，完整的產品階梯和定價就在眼前。</p>
-  <button class="btn-primary" onclick="openDiag()">拿我的變現路徑</button>
-  <div class="note">13 題 · 約 5 分鐘 · 59 個真實案例為基礎</div>
+  <h2>現在<em>發掘你</em>如何變現。</h2>
+  <p>看完別人，該看你了。13 題、5 分鐘——你會拿到一條屬於你自己的 5 步變現路徑：具體產品、定價、平台、Day 1 該做什麼。</p>
+  <button class="btn-primary" onclick="openDiag()">發掘我的變現方式</button>
+  <div class="note">13 題 · 約 5 分鐘 · 不用註冊 · 做完即出</div>
 </section>
 
 <footer>
@@ -533,18 +538,31 @@ function openCase(id){
 }
 function closeCase(){document.getElementById('caseModal').classList.remove('on');document.body.style.overflow='';}
 
-/* ── TAXONOMY ── */
-const TAX=[
-['M-01','人格型','粉絲追的是你。賣寫真、會員、見面會——把關係變成產品。','Moriah · Ryan Trahan'],
-['M-02','生活方式型','粉絲想活得像你。賣你日常在用的消耗品。','Emma · 滴妹 · Pamela'],
-['M-03','專業教學型','粉絲來學。賣指南、工具包、課程——把能力結構化。','Ali · Coffee Lam'],
-['M-04','審美編輯型','粉絲喜歡你的品味。賣精選、Lookbook、膠囊系列。','Matilda · Molly-Mae'],
-['M-05','信任推薦型','粉絲信你的推薦。從推薦別人，變成賣自己的。','黎貝卡 · Nikkie'],
-['M-06','IP 型','粉絲追你的角色。賣 Plush、小卡、貼圖——把 IP 變收藏品。','Moriah · 李子柒'],
-['M-07','社群經營型','粉絲想加入你的圈子。賣會員、直播、私密社群。','滇西小哥 · 李子柒']
+/* ── SECTION 3 · 59 種變現方式（節選 8 個）── */
+const PEEK=[
+{who:'Logan Paul & KSI',photo:'img/wiki-loganpaul.jpg',cat:'FMCG 飲料',what:'PRIME 運動飲料',price:'$3',rev:'$1.4B',note:'回購型消耗品 · 大規模零售',url:'https://drinkprime.com'},
+{who:'MrBeast',photo:'img/wiki-mrbeast.png',cat:'零食',what:'Feastables 巧克力棒',price:'$4',rev:'$250M',note:'3 萬個零售點 · Walmart / Target',url:'https://feastables.com'},
+{who:'Huda Kattan',photo:'img/wiki-huda.jpg',cat:'美妝自有品牌',what:'Huda Beauty 假睫毛',price:'$14',rev:'$300M',note:'Sephora 進駐 · 品牌估值 $1.2B',url:'https://hudabeauty.com'},
+{who:'Ali Abdaal',photo:'img/ali.png',cat:'線上課程',what:'Part-Time YouTuber Academy',price:'$995',rev:'$5M+ / 年',note:'數位階梯頂端 · Thinkific',url:'https://academy.aliabdaal.com'},
+{who:'Emma Chamberlain',photo:'img/emma.jpg',cat:'咖啡消耗品',what:'Chamberlain Coffee',price:'$24',rev:'$20M+',note:'DTC + Target / Whole Foods',url:'https://chamberlaincoffee.com'},
+{who:'deadmau5',photo:'img/wiki-deadmau5.jpg',cat:'音樂素材',what:'Chimaera Sample Pack',price:'$7.99',rev:'$500K+',note:'110 個 MIDI · royalty-free',url:'https://splice.com/sounds/packs/deadmau5-chimaera'},
+{who:'Joe Budden Network',photo:'',cat:'Patreon 會員',what:'JBN 私人會員內容',price:'$5-10 / 月',rev:'$1M+ / 月',note:'史上營收最高 Patreon',url:'https://www.patreon.com/JoeBudden'},
+{who:'Ryan Trahan',photo:'img/wiki-ryan.png',cat:'實體零食',what:'JOYRIDE 糖果',price:'$8',rev:'7-Eleven 全省',note:'Creator 持有股份 + 創意總監',url:'https://www.joyridesweets.com'}
 ];
-document.getElementById('taxGrid').innerHTML=TAX.map(t=>`
-<div class="tax-c"><div class="n">${t[0]}</div><h4>${t[1]}</h4><p>${t[2]}</p><div class="ex">${t[3]}</div></div>`).join('');
+document.getElementById('peekGrid').innerHTML=PEEK.map(p=>{
+  const col=PALETTE[hash(p.who)%PALETTE.length];
+  return `<a class="pk" href="${p.url}" target="_blank" rel="noopener" style="text-decoration:none">
+    <div class="ph" style="background:${col}">
+      ${p.photo?`<img src="${p.photo}" alt="${p.who}" loading="lazy">`:`<span class="fb">${ini(p.who)}</span>`}
+      <span class="cat">${p.cat}</span>
+    </div>
+    <div class="bd">
+      <div class="nm">${p.who}</div>
+      <div class="pr">${p.price}</div>
+      <div class="rv">${p.what}<b>${p.rev}</b>${p.note}</div>
+    </div>
+  </a>`;
+}).join('');
 
 /* ── DIAGNOSTIC ── */
 const W={A:1.0,B:0.7,C:0.5,D:0.2};
