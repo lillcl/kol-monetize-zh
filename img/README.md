@@ -1,62 +1,40 @@
-# 圖片來源 / Image credits
+# 圖片來源
 
-## 已有照片（14 張，2.7MB，全部本地，640px）
+## img/product/ — 28 張真實產品圖
+直接從各創作者自己的商品頁抓 og:image / 內頁大圖。
+對應 `ways.html` 裡 ITEMS 陣列每個物件的 `img` 欄位。
 
-| 檔案 | 人物 | 來源 | 授權 |
-|---|---|---|---|
-| `emma.jpg` | Emma Chamberlain | sagefinder CDN | 媒體照 |
-| `grace.jpg` | Grace Beverley | Insider CDN | 媒體照 |
-| `moriah.jpg` | Moriah Elizabeth | bookingagentinfo | 媒體照 |
-| `ali.png` | Ali Abdaal | proassetspdlcom CDN | 媒體照 |
-| `coffee.jpg` | Coffee Lam 林芊妤 | HK01 CDN | 媒體照 |
-| `dimei.jpg` | 滴妹 | mirrormedia MG | 媒體照 |
-| `wiki-emma.png` | Emma Chamberlain | Wikimedia Commons | CC BY-SA |
-| `wiki-grace.jpg` | Grace Beverley | Wikimedia Commons | CC BY-SA |
-| `wiki-mrbeast.png` | MrBeast | Wikimedia Commons | CC BY-SA |
-| `wiki-nikkie.jpg` | Nikkie de Jager | Wikimedia Commons | CC BY-SA |
-| `wiki-huda.jpg` | Huda Kattan | Wikimedia Commons | CC BY-SA |
-| `wiki-deadmau5.jpg` | deadmau5 | Wikimedia Commons | CC BY-SA |
-| `wiki-loganpaul.jpg` | Logan Paul | Wikimedia Commons | CC BY-SA |
-| `wiki-ryan.png` | Ryan Trahan | Wikimedia Commons | CC BY-SA |
+| 檔案 | 內容 |
+|---|---|
+| `00/01-peter-mckinnon` | Lightroom Preset Master Bundle、Cine LUTs V2 |
+| `03-ben-marriott` | Master Motion Design Course |
+| `08-deadmau5` | Chimaera Sample Pack (Splice) |
+| `09-pangram-pangram` | Neue Montreal 字型 |
+| `10-omar-zenhom` | $100MBA All-Access Pass |
+| `13-whitney-simmons` | Gymshark Adapt 系列 |
+| `15-bts-hybe` | Weverse 小卡 |
+| `16-huda-kattan` | Huda Beauty 假睫毛 |
+| `17-nikkietutorials` | Nimya Brr Brr Cooling Eye Stick |
+| `18-emma-chamberlain` | Chamberlain Coffee |
+| `19/40-mrbeast` | Feastables 巧克力 |
+| `20-logan-paul-ksi` | PRIME 運動飲料 |
+| `35/36/37` | Substack：Heather Cox Richardson、Mehdi Hasan、The Bulwark |
+| `44/45/50` | K-pop 見面會：MJ、TAEYANG、YUMEKI |
+| `46/47/49/51/54/57` | 活動：台北攝影工作坊、Julie Bell、Mountain Lily、Kyle Lam、Below Deck、The Regency |
+| `55/56` | Colin & Samir、Glossier pop-up |
 
-Wikimedia 圖片為 CC BY-SA，若要商業使用請在頁腳加上出處與作者連結。
+抓不到圖的 23 個（多數是 Patreon / Gumroad / Walmart / Amazon，前端渲染或擋爬蟲）
+維持顯示彩色縮寫。
 
-## 怎麼換成自己的照片
+## img/ 根目錄 — 17 張人物照 + podcast logo
+| 檔案 | 人物 | 來源 |
+|---|---|---|
+| `emma.jpg` `grace.jpg` `moriah.jpg` `ali.png` `coffee.jpg` `dimei.jpg` | 六位個案 | 媒體 CDN |
+| `wiki-*.jpg/png` | MrBeast、Nikkie、Huda、deadmau5、Logan Paul、Ryan Trahan、Emma、Grace | Wikimedia Commons（CC BY-SA） |
+| `joe.jpg` `coffeez.jpg` | Joe Budden、Coffeezilla | Wikimedia Commons（CC BY-SA） |
 
-照片在 `index.html` 和 `ways.html` 兩個地方對應：
+## 換圖
+`ways.html` — 直接改 ITEMS 每個物件的 `img:"..."` 欄位
+`index.html` — 個案卡改 `photo:'...'`；59 種節選改 PEEK 陣列的 `photo:'...'`
 
-### index.html — 6 位個案
-```js
-photo:'img/emma.jpg'   // 直接改這行
-```
-
-### index.html — 診斷結果的對標創作者
-```js
-const PHOTO={
-  'Emma Chamberlain':'img/emma.jpg',
-  'Ryan Trahan':'img/wiki-ryan.jpg',
-  // 鍵必須完全符合 BM 陣列裡的名字
-};
-```
-
-### ways.html — 59 個案例
-```js
-const PHOTO={
-  'Ali Abdaal':'img/ali.png',
-  'MrBeast':'img/wiki-mrbeast.png',
-  // 鍵必須完全符合 ITEMS 裡的 kol_name
-};
-```
-
-**規則**：有路徑就顯示照片，值是 `''` 就顯示彩色縮寫。兩邊 key 都對不上會靜默 fallback 到縮寫，不會壞掉。
-
-## 建議規格
-- 4:3 或 1:1，人物臉在畫面上半部
-- 至少 640px 寬
-- JPG 或 PNG 都行，副檔名要跟實際格式一致（PNG 存成 .jpg 瀏覽器多半能跑，但會有 MIME 錯誤）
-
-## 加新照片
-```bash
-curl -L -o img/newname.jpg "https://..."
-sips -Z 640 img/newname.jpg --out img/newname.jpg
-```
+規格：至少 640px 寬，4:3 或 1:1，副檔名要跟實際格式一致。

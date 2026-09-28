@@ -540,14 +540,14 @@ function closeCase(){document.getElementById('caseModal').classList.remove('on')
 
 /* ── SECTION 3 · 59 種變現方式（節選 8 個）── */
 const PEEK=[
-{who:'Logan Paul & KSI',photo:'img/wiki-loganpaul.jpg',cat:'FMCG 飲料',what:'PRIME 運動飲料',price:'$3',rev:'$1.4B',note:'回購型消耗品 · 大規模零售',url:'https://drinkprime.com'},
-{who:'MrBeast',photo:'img/wiki-mrbeast.png',cat:'零食',what:'Feastables 巧克力棒',price:'$4',rev:'$250M',note:'3 萬個零售點 · Walmart / Target',url:'https://feastables.com'},
-{who:'Huda Kattan',photo:'img/wiki-huda.jpg',cat:'美妝自有品牌',what:'Huda Beauty 假睫毛',price:'$14',rev:'$300M',note:'Sephora 進駐 · 品牌估值 $1.2B',url:'https://hudabeauty.com'},
+{who:'Logan Paul & KSI',photo:'img/product/20-logan-paul-ksi.png',cat:'FMCG 飲料',what:'PRIME 運動飲料',price:'$3',rev:'$1.4B',note:'回購型消耗品 · 大規模零售',url:'https://drinkprime.com'},
+{who:'MrBeast',photo:'img/product/19-mrbeast.png',cat:'零食',what:'Feastables 巧克力棒',price:'$4',rev:'$250M',note:'3 萬個零售點 · Walmart / Target',url:'https://feastables.com'},
+{who:'Huda Kattan',photo:'img/product/16-huda-kattan.webp',cat:'美妝自有品牌',what:'Huda Beauty 假睫毛',price:'$14',rev:'$300M',note:'Sephora 進駐 · 品牌估值 $1.2B',url:'https://hudabeauty.com'},
 {who:'Ali Abdaal',photo:'img/ali.png',cat:'線上課程',what:'Part-Time YouTuber Academy',price:'$995',rev:'$5M+ / 年',note:'數位階梯頂端 · Thinkific',url:'https://academy.aliabdaal.com'},
-{who:'Emma Chamberlain',photo:'img/emma.jpg',cat:'咖啡消耗品',what:'Chamberlain Coffee',price:'$24',rev:'$20M+',note:'DTC + Target / Whole Foods',url:'https://chamberlaincoffee.com'},
-{who:'deadmau5',photo:'img/wiki-deadmau5.jpg',cat:'音樂素材',what:'Chimaera Sample Pack',price:'$7.99',rev:'$500K+',note:'110 個 MIDI · royalty-free',url:'https://splice.com/sounds/packs/deadmau5-chimaera'},
-{who:'Joe Budden Network',photo:'',cat:'Patreon 會員',what:'JBN 私人會員內容',price:'$5-10 / 月',rev:'$1M+ / 月',note:'史上營收最高 Patreon',url:'https://www.patreon.com/JoeBudden'},
-{who:'Ryan Trahan',photo:'img/wiki-ryan.png',cat:'實體零食',what:'JOYRIDE 糖果',price:'$8',rev:'7-Eleven 全省',note:'Creator 持有股份 + 創意總監',url:'https://www.joyridesweets.com'}
+{who:'Emma Chamberlain',photo:'img/product/18-emma-chamberlain.jpg',cat:'咖啡消耗品',what:'Chamberlain Coffee',price:'$24',rev:'$20M+',note:'DTC + Target / Whole Foods',url:'https://chamberlaincoffee.com'},
+{who:'deadmau5',photo:'img/product/08-deadmau5.jpg',cat:'音樂素材',what:'Chimaera Sample Pack',price:'$7.99',rev:'$500K+',note:'110 個 MIDI · royalty-free',url:'https://splice.com/sounds/packs/deadmau5-chimaera'},
+{who:'Joe Budden Network',photo:'img/joe.jpg',cat:'Patreon 會員',what:'JBN 私人會員內容',price:'$5-10 / 月',rev:'$1M+ / 月',note:'史上營收最高 Patreon',url:'https://www.patreon.com/JoeBudden'},
+{who:'Ryan Trahan',photo:'',cat:'實體零食',what:'JOYRIDE 糖果',price:'$8',rev:'7-Eleven 全省',note:'Creator 持有股份 + 創意總監',url:'https://www.joyridesweets.com'}
 ];
 document.getElementById('peekGrid').innerHTML=PEEK.map(p=>{
   const col=PALETTE[hash(p.who)%PALETTE.length];
