@@ -49,9 +49,10 @@ a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
 
 .card{background:#fff;border:1px solid var(--ink);display:flex;flex-direction:column;transition:transform .15s}
 .card:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(16,24,40,.08)}
-.card .head{height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;position:relative;flex:none}
-.card .head .ini{font-family:var(--display);font-size:26px;font-weight:500;color:rgba(255,255,255,.92);letter-spacing:-.01em;line-height:1}
-.card .head .cat{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.78);padding:3px 6px;border:1px solid rgba(255,255,255,.3)}
+.card .head{height:88px;display:block;position:relative;flex:none;overflow:hidden;background:var(--ink)}
+.card .head img{width:100%;height:100%;object-fit:cover;object-position:center 22%;filter:saturate(.92) contrast(1.03);display:block}
+.card .head .fb{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:26px;font-weight:500;color:rgba(255,255,255,.92);letter-spacing:-.01em}
+.card .head .cat{position:absolute;top:8px;right:8px;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:rgba(14,15,17,.82);padding:3px 6px}
 .card .body{padding:14px 14px 16px;display:flex;flex-direction:column;flex:1}
 .card .name{font-family:var(--display);font-size:17px;font-weight:500;margin:0 0 2px;letter-spacing:-.01em;line-height:1.15}
 .card .sub{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--muted);margin-bottom:8px;text-transform:uppercase}
@@ -131,9 +132,17 @@ function hash(s) {
   for (let i = 0; i < s.length; i++) h = ((h << 5) - h + s.charCodeAt(i)) | 0;
   return Math.abs(h);
 }
-function color(name) {
-  return PALETTE[hash(name) % PALETTE.length];
-}
+const PHOTO={
+'Peter McKinnon':'','Thomas Frank':'','Ben Marriott':'','Ali Abdaal':'img/ali.png',
+'August Bradley':'','Brandon Woelfel':'','AI Primitives':'','deadmau5':'img/wiki-deadmau5.jpg',
+'Pangram Pangram':'','Omar Zenhom (#100MBA)':'','Kat Norton (Miss Excel)':'',
+'Moriah Elizabeth':'img/moriah.jpg','Whitney Simmons':'','BTS (HYBE)':'',
+'Huda Kattan':'img/wiki-huda.jpg','NikkieTutorials':'img/wiki-nikkie.jpg',
+'Emma Chamberlain':'img/emma.jpg','MrBeast':'img/wiki-mrbeast.png','Logan Paul & KSI':'img/wiki-loganpaul.jpg',
+'Drew Barrymore':'','Andrew Rea (Binging with Babish)':'','Bobby Parrish (Flavortown)':'',
+'Ryan Trahan':'img/wiki-ryan.jpg'
+};
+function color(name){return PALETTE[hash(name)%PALETTE.length];}
 
 const ITEMS = [
 {category:"Digital Products",subcategory:"Photo preset pack",kol_name:"Peter McKinnon",kol_followers:"6M",product_name:"PM Lightroom Preset Master Bundle",platform:"Shopify",url:"https://petermckinnon.shop/products/pm-lightroom-preset-master-bundle",price:"$115",revenue:{type:"estimated",amount:"$500K+ lifetime"},description:"Bundle of all PM Lightroom preset versions used by McKinnon across travel videos."},
@@ -219,9 +228,10 @@ function render() {
     const revClass = rev.type === 'reported' ? 'rev' : 'rev est';
     const catLabel = item.category.replace(' & ', '/').replace(' Products', '');
     const col = color(item.kol_name);
+    const ph = PHOTO[item.kol_name];
     return `<article class="card">
       <div class="head" style="background:${col}">
-        <span class="ini">${initials(item.kol_name)}</span>
+        ${ph?`<img src="${ph}" alt="${item.kol_name}" loading="lazy">`:`<span class="fb">${initials(item.kol_name)}</span>`}
         <span class="cat">${catLabel}</span>
       </div>
       <div class="body">

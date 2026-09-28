@@ -100,16 +100,18 @@ a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
 
 /* cases */
 .cases{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.case{border:1px solid var(--ink);background:#fff;display:flex;flex-direction:column;cursor:pointer;transition:transform .16s}
-.case:hover{transform:translateY(-2px)}
-.case .bar-c{height:5px}
-.case .in{padding:16px 16px 18px;display:flex;flex-direction:column;flex:1}
-.case h3{font-family:var(--display);font-size:20px;margin:0 0 3px;font-weight:500;letter-spacing:-.02em;line-height:1.15}
-.case .mech{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:12px}
-.case .prices{display:flex;gap:16px;font-family:var(--mono);font-size:11px;color:var(--muted);padding-bottom:12px;border-bottom:1px solid var(--rule);margin-bottom:12px;flex-wrap:wrap}
-.case .prices b{display:block;color:var(--red);font-size:16px;font-weight:500}
+.case{border:1px solid var(--ink);background:#fff;display:flex;flex-direction:column;cursor:pointer;transition:transform .16s;overflow:hidden}
+.case:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(16,24,40,.1)}
+.case .photo{aspect-ratio:4/3;overflow:hidden;background:var(--paper-deep);position:relative;border-bottom:1px solid var(--ink)}
+.case .photo img{width:100%;height:100%;object-fit:cover;filter:saturate(.9) contrast(1.03);transition:transform .4s ease}
+.case:hover .photo img{transform:scale(1.04)}
+.case .photo .mech-tag{position:absolute;left:0;bottom:0;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:6px 10px}
+.case .in{padding:16px;display:flex;flex-direction:column;flex:1}
+.case h3{font-family:var(--display);font-size:21px;margin:0 0 12px;font-weight:500;letter-spacing:-.02em;line-height:1.15}
+.case .prices{display:flex;gap:18px;font-family:var(--mono);font-size:11px;color:var(--muted);padding-bottom:12px;border-bottom:1px solid var(--rule);margin-bottom:12px;flex-wrap:wrap}
+.case .prices b{display:block;color:var(--red);font-size:17px;font-weight:500;letter-spacing:-.01em}
 .case p{font-size:15px;line-height:1.55;margin:0 0 14px;flex:1}
-.case .go{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--ink);padding:8px;text-align:center;transition:background .14s,color .14s}
+.case .go{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--ink);padding:9px;text-align:center;transition:background .14s,color .14s}
 .case:hover .go{background:var(--ink);color:var(--paper)}
 
 /* taxonomy */
@@ -140,7 +142,8 @@ footer{padding:22px 28px;display:flex;justify-content:space-between;gap:16px;fon
 .modal-head button{background:transparent;border:0;font-size:22px;cursor:pointer;color:var(--ink);line-height:1;padding:0 6px}
 .modal-body{padding:24px}
 .modal-hero{display:grid;grid-template-columns:150px 1fr;gap:20px;margin-bottom:22px}
-.modal-hero .av{width:150px;height:190px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:44px;font-weight:500;color:#fff;letter-spacing:-.02em}
+.modal-hero .av{width:150px;height:190px;overflow:hidden;flex:none;background:var(--paper-deep)}
+.modal-hero .av img{width:100%;height:100%;object-fit:cover;display:block}
 .modal-hero h2{font-family:var(--display);font-size:32px;margin:0 0 4px;font-weight:500;letter-spacing:-.03em;line-height:1.08}
 .modal-hero .role{font-style:italic;color:var(--muted);font-size:16px;margin-bottom:12px}
 .modal-hero .mech{font-family:var(--mono);font-size:10px;color:var(--red);letter-spacing:.1em;text-transform:uppercase;padding:8px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
@@ -222,7 +225,8 @@ footer{padding:22px 28px;display:flex;justify-content:space-between;gap:16px;fon
 .res-bm h4{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
 .bm-r{display:flex;align-items:center;gap:11px;padding:8px 0;border-bottom:1px solid var(--rule)}
 .bm-r:last-child{border-bottom:0}
-.bm-r .av{width:40px;height:40px;flex:none;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:15px;color:#fff;font-weight:500}
+.bm-r .av{width:44px;height:44px;flex:none;overflow:hidden;border-radius:50%;background:var(--paper-deep)}
+.bm-r .av img{width:100%;height:100%;object-fit:cover;display:block}
 .bm-r .nm{font-family:var(--display);font-size:16px;font-weight:500;line-height:1.2}
 .bm-r .mc{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
 .bm-r .pc{margin-left:auto;font-family:var(--display);font-size:21px;color:var(--red);font-weight:500}
@@ -423,8 +427,15 @@ const PALETTE=['#D2453A','#3A5A40','#1F4E5F','#7A4A2E','#5C3A6E','#A0522D','#2E5
 function hash(s){let h=0;for(let i=0;i<s.length;i++)h=((h<<5)-h+s.charCodeAt(i))|0;return Math.abs(h);}
 function ini(n){return n.split(/\s+/).filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase();}
 
+const PHOTO={
+'Emma Chamberlain':'img/emma.jpg','Grace Beverley':'img/grace.jpg','Moriah Elizabeth':'img/moriah.jpg',
+'Coffee Lam':'img/coffee.jpg','Ali Abdaal':'img/ali.png','滴妹':'img/dimei.jpg',
+'Ryan Trahan':'img/wiki-ryan.jpg','MrBeast':'img/wiki-mrbeast.png','NikkieTutorials':'img/wiki-nikkie.jpg',
+'Huda Kattan':'img/wiki-huda.jpg','deadmau5':'img/wiki-deadmau5.jpg','Logan Paul':'img/wiki-loganpaul.jpg'
+};
+
 const CASES=[
-{id:'emma',name:'Emma Chamberlain',mech:'生活儀式 → 消耗品',
+{id:'emma',name:'Emma Chamberlain',mech:'生活儀式 → 消耗品',photo:'img/emma.jpg',
 prices:[['抹茶','$30'],['咖啡','$20'],['入門包','$44-72'],['組合包','$80-99']],
 desc:'她賣的不是咖啡，是「你也能有她那個早晨」的入場券。',
 h:'實體消耗品是最大宗收入來源。點進看完整拆解。',
@@ -433,8 +444,8 @@ items:[['Matcha','$30'],['Cold Brew Coffee','$20'],['Cold Brew Starter Pack','$4
 copy:['內容裡反覆出現的習慣，就是你的產品類別','Starter pack 降低第一次購買的門檻','消耗品的回購週期比單次 merch 更有價值'],
 dont:'不要一開始就開咖啡品牌。Emma 的供應鏈花了多年與資金——先用數位產品或預購驗證需求。',
 srcs:[['官網','https://chamberlaincoffee.com'],['Starter Pack','https://chamberlaincoffee.com/products/chamberlain-coffee-cold-brew-coffee-starter-pack']]},
-{id:'grace',name:'Grace Beverley',mech:'專業教學 + 創辦人審美',
-prices:[['Productivity Method','—'],['TALA 服飾','—'],['planner','—']],
+{id:'grace',name:'Grace Beverley',mech:'專業教學 + 創辦人審美',photo:'img/grace.jpg',
+prices:[['Production Method','—'],['TALA 服飾','—'],['planner','—']],
 desc:'兩條產品線、同一群觀眾：教生產力的數位課程，加她本人穿搭的 TALA。',
 h:'教學內容應該有階梯——永遠不要從頂端開始賣。',
 quote:'免費內容證明能力，低價數位驗證付費意願，中價課鞏固權威，旗艦課收費。',
@@ -442,7 +453,7 @@ items:[['Productivity Method','—'],['TALA Founder 精選','—'],['數位 plan
 copy:['內容本身就是店面','先用數位 / planner 驗證專業力','再把創辦人審美商品化'],
 dont:'不要同時建立多個重資產品牌。Grace 撐得住，你多半撐不住——選階梯或選服飾線。',
 srcs:[['TALA Founder Feed','https://www.wearetala.com/en-us/pages/shop-grace-instagram'],['Productivity Method','https://productivitymethod.com/']]},
-{id:'moriah',name:'Moriah Elizabeth',mech:'IP → 收藏品生態系',
+{id:'moriah',name:'Moriah Elizabeth',mech:'IP → 收藏品生態系',photo:'img/moriah.jpg',
 prices:[['吊飾','$15'],['迷你','$25'],['Plush','$30'],['家族包','$76']],
 desc:'同一個 IP，五個價格帶。角色本身就是護城河。',
 h:'先讓觀眾記住一個 IP，再把它做成不同價位的商品。',
@@ -451,7 +462,7 @@ items:[['吊飾 Keychain','$14.99'],['Mini Plush Duo','$24.99'],['Plush','$29.99
 copy:['先創造觀眾會記住的反覆出現角色','同一個 IP 做不同價位','組合包 + 限量 Drop'],
 dont:'沒有反覆出現的 IP 就不要做 plush。一般 merchandise 是創作者電商的墳場。',
 srcs:[['官方 Merch','https://moriahelizabethmerch.com/']]},
-{id:'coffee',name:'Coffee Lam 林芊妤',mech:'專業力 + 痛點 → 自有品牌',
+{id:'coffee',name:'Coffee Lam 林芊妤',mech:'專業力 + 痛點 → 自有品牌',photo:'img/coffee.jpg',
 prices:[['CoffeeSweat','—'],['瑜珈內衣','—'],['瑜珈褲','—']],
 desc:'留言區吵了三年的一件事：小胸女生買不到合適的瑜珈內衣。',
 h:'去翻你的留言區，找出觀眾吵最久的問題。',
@@ -460,7 +471,7 @@ items:[['瑜珈內衣','—'],['瑜珈褲','—'],['運動上衣','—']],
 copy:['產品源頭必須是真實痛點','內容就是產品 demo','用客單門檻拉高 AOV'],
 dont:'沒有專業力就不要先開服飾品牌。製造、庫存、退貨——都很重。',
 srcs:[['About','https://coffeesweat.com/zh-cn/pages/about-us'],['Shop','https://coffeesweat.com/collections/all-products']]},
-{id:'ali',name:'Ali Abdaal',mech:'數位階梯 $27 → $995',
+{id:'ali',name:'Ali Abdaal',mech:'數位階梯 $27 → $995',photo:'img/ali.png',
 prices:[['YouTube OS','$27'],['組合包','$56'],['短課','$149'],['PTYA','$995']],
 desc:'每一步教觀眾下一步存在。低價數位是研究，不是營收。',
 h:'一個內容支柱對應一個產品，然後層層往上。',
@@ -469,23 +480,25 @@ items:[['YouTube OS','$27'],['OS + Thumbnail 組合','$56'],['Camera Confidence'
 copy:['一個內容支柱對應一個產品','低價先驗證，再 upsell 課程','旗艦定價由觀眾已付過的錢決定'],
 dont:'沒有權威性就不要從 $800+ 的課程開始。',
 srcs:[['Shop','https://aliabdaal.com/shop/'],['Products','https://shop.aliabdaal.com/collections/all']]},
-{id:'dimei',name:'滴妹',mech:'人格 + 調性 → 高頻回購',
+{id:'dimei',name:'滴妹',mech:'人格 + 調性 → 高頻回購',photo:'img/dimei.jpg',
 prices:[['NAP TEA','—'],['再睡5分鐘','—'],['門市限定','—']],
 desc:'喝茶的時候會想到她。這就是為什麼每週回購。',
 h:'品牌調性強 → 找調性對應的消耗品。',
 quote:'品牌調性強（慵懶）→ 找對應的消耗品（茶）。不是先選類別，是先想清楚你是誰。',
 items:[['NAP TEA 茶飲','—'],['再睡5分鐘系列','—'],['門市限定款','—']],
-copy:['高頻回購比一次 merch 更重要','把粉絲關係放進消耗品','線下門市也是粉絲接觸點'],
+copy:['高頻回購比一次 merch 更重要','把粉絲關關放進消耗品','線下門市也是粉絲接觸點'],
 dont:'F&B 供應鏈和門市需要資本——不要低估。',
 srcs:[['NAP TEA','https://www.napteazzz.com/']]}
 ];
 
 document.getElementById('caseGrid').innerHTML=CASES.map(c=>`
 <article class="case" onclick="openCase('${c.id}')">
-  <div class="bar-c" style="background:${PALETTE[hash(c.name)%PALETTE.length]}"></div>
+  <div class="photo">
+    <img src="${c.photo}" alt="${c.name}" loading="lazy">
+    <span class="mech-tag">${c.mech}</span>
+  </div>
   <div class="in">
     <h3>${c.name}</h3>
-    <div class="mech">${c.mech}</div>
     <div class="prices">${c.prices.map(p=>`<div><b>${p[1]}</b>${p[0]}</div>`).join('')}</div>
     <p>${c.desc}</p>
     <div class="go">看完整拆解 →</div>
@@ -494,11 +507,10 @@ document.getElementById('caseGrid').innerHTML=CASES.map(c=>`
 
 function openCase(id){
   const c=CASES.find(x=>x.id===id);
-  const col=PALETTE[hash(c.name)%PALETTE.length];
   document.getElementById('cmLabel').textContent='個案研究 · '+c.name;
   document.getElementById('cmBody').innerHTML=`
     <div class="modal-hero">
-      <div class="av" style="background:${col}">${ini(c.name)}</div>
+      <div class="av"><img src="${c.photo}" alt="${c.name}"></div>
       <div>
         <h2>${c.name}</h2>
         <div class="role">${c.mech}</div>
@@ -742,7 +754,7 @@ function result(){
     </div>
     <div class="res-bm">
       <h4>真實創作者對標</h4>
-      ${bm.map(b=>`<div class="bm-r"><div class="av" style="background:${PALETTE[hash(b[0])%PALETTE.length]}">${ini(b[0])}</div><div><div class="nm">${b[0]}</div><div class="mc">${b[1]}</div></div><div class="pc">${Math.round(b[2]*top)}%</div></div>`).join('')}
+      ${bm.map(b=>`<div class="bm-r"><div class="av">${PHOTO[b[0]]?`<img src="${PHOTO[b[0]]}" alt="${b[0]}">`:''}</div><div><div class="nm">${b[0]}</div><div class="mc">${b[1]}</div></div><div class="pc">${Math.round(b[2]*top)}%</div></div>`).join('')}
     </div>
     <div class="res-foot">
       <span class="t">完成 · ${flow.length} / ${flow.length} 題</span>
