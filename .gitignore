@@ -1,1 +1,6 @@
+.DS_Store
 .vercel
+node_modules/
+*.log
+img/og.json
+img/map.json
